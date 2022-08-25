@@ -108,6 +108,19 @@ public class Temporada {
         return 0;
     }
 
+    public int getCantEpisodiosValidos() {
+
+        int cantEpisodiosValidos = 0;
+
+        for (int i = 0; i < episodios.length; i++) {
+
+            if (episodios[i] != null) {
+                cantEpisodiosValidos++;
+            }
+        }
+        return cantEpisodiosValidos;
+    }
+
     @Override
     public String toString() {
         return "Temporada [Titulo=" + Titulo + ", cantEpisodios=" + cantEpisodios + ", episodios=" + Arrays.toString(episodios) + "]";

@@ -60,5 +60,8 @@ public class Main {
 
         //Promedio de episodios de una serie
         System.out.println("Promedio s1: " + s1.getPromedio());
+
+        //Determinar si se vio todos los episodios de una serie
+        System.out.println("Se vieron todos los episodios de s1? " + s1.areAllEpisodiosVistos());
     }
 }

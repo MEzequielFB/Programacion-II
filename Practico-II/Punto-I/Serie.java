@@ -129,15 +129,24 @@ public class Serie {
         return 0;
     }
 
-    /* public boolean isAllEpisodiosVistos() {
+    public boolean areAllEpisodiosVistos() {
+
+        int cantEpisodiosTotal = 0;
+        int cantEpisodiosVistos = 0;
 
         for (int i = 0; i < temporadas.length; i++) {
 
             if (temporadas[i] != null) {
-                temporadas[i].getCantEpisodiosVistos()
+
+                cantEpisodiosTotal += temporadas[i].getCantEpisodiosValidos();
+                cantEpisodiosVistos += temporadas[i].getCantEpisodiosVistos();
             }
         }
-    } */
+        if (cantEpisodiosTotal == cantEpisodiosVistos) {
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public String toString() {
