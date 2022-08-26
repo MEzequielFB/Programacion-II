@@ -68,29 +68,32 @@ public class Reunion {
     //Si no existe la persona en la lista se agrega
     public void addPersona(Persona p) {
 
-        for (int i = 0; i < personas.size(); i++) {
-
-            if (personas.get(i).equals(p)) {
-
-                System.out.print(p.getNombre() + " ya está en la reunión");
-                return;
-            }
+        if (!existePersonaEnLista(p)) {
+            personas.add(p);
         }
-        this.personas.add(p);
     }
 
     //Si existe la persona en la lista se elimina
     public void removePersona(Persona p) {
         
+        if (existePersonaEnLista(p)) {
+            personas.remove(p);
+        }
+    }
+
+    private boolean existePersonaEnLista(Persona p) {
+
         for (int i = 0; i < personas.size(); i++) {
-
             if (personas.get(i).equals(p)) {
-
-                personas.remove(i);
-                System.out.println(p.getNombre() + " eliminado/a de la reunión");
-                return;
+                return true;
             }
         }
-        System.out.println(p.getNombre() + " no es participe de esta reunión");
+        return false;
     }
+
+    @Override
+    public String toString() {
+        return "Reunion [tema=" + tema + ", ubicacion=" + ubicacion +  ", fecha=" + fecha + ", horario_fin=" + horario_fin + ", horario_inicio=" + horario_inicio +  ", personas=" + personas + "]";
+    }
+    
 }

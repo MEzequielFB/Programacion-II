@@ -1,8 +1,9 @@
+
 public class Persona {
     
     private String nombre;
     private boolean asistente;
-    private int telefono; //Si no se registra un telefono el valor es -1
+    private String telefono; //Si no se registra un telefono el valor es -1
     private String mail; //Si no se registra un mail el valor es null
 
     public Persona() {
@@ -13,8 +14,16 @@ public class Persona {
 
         setNombre(nombre);
         setEsAsistente(false);
-        setTelefono(-1);
+        setTelefono("");
         setMail(null);
+    }
+
+    public Persona(String nombre, String telefono, String mail) {
+
+        setNombre(nombre);
+        setEsAsistente(true);
+        setTelefono(telefono);
+        setMail(mail);
     }
 
     //Getters
@@ -26,7 +35,7 @@ public class Persona {
         return asistente;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
@@ -43,11 +52,16 @@ public class Persona {
         this.asistente = asistente;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona [nombre=" + nombre + "]";
     }
 }
