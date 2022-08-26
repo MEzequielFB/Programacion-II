@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Provincia {
-    
+
     private String nombre;
     private ArrayList<Ciudad> ciudades;
 
@@ -12,17 +12,29 @@ public class Provincia {
     }
 
     //Funcionalidades
+    public int getCantCiudadesSinMinimoDeHabitantes() {
+        
+        int cant_ciudades_sin_minimo = 0;
+        for (int i = 0; i < ciudades.size(); i++) {
+
+            if (!ciudades.get(i).tieneMinimoDeHabitantes()) {
+                cant_ciudades_sin_minimo++;
+            }
+        }
+        return cant_ciudades_sin_minimo;
+    }
+
     public boolean masDeLaMitadCiudadesConDeficit() {
 
         int cant_ciudades_con_deficit = 0;
         for (int i = 0; i < ciudades.size(); i++) {
 
-            if (ciudades.get(i).estaEnDeficit()) {
+            if (ciudades.get(i).estaEnDeficit() && ciudades.get(i).tieneMinimoDeHabitantes()) { //Se controla que las ciudades cumplan con el mínimo de habitantes
 
                 cant_ciudades_con_deficit++;
             }
         }
-        if (cant_ciudades_con_deficit > Math.floor(ciudades.size() / 2)) {
+        if (cant_ciudades_con_deficit > Math.floor((ciudades.size() - this.getCantCiudadesSinMinimoDeHabitantes()) / 2)) { //Se resta la cantidad de ciudades que no cumplen con el minimo de habitantes ya que no se tienen en cuenta controlar el gasto público
             return true;
         }
         return false;
@@ -34,9 +46,9 @@ public class Provincia {
         for (int i = 0; i < ciudades.size(); i++) {
 
             Ciudad ciudad = ciudades.get(i);
-            if (ciudad.estaEnDeficit()) {
+            if (ciudad.estaEnDeficit() && ciudad.tieneMinimoDeHabitantes()) { //Se controla que las ciudades cumplan con el mínimo de habitantes
 
-                ciudades_en_deficit += "- " + ciudad.getNombre();
+                ciudades_en_deficit += "- " + ciudad.getNombre() + " ";
             }
         }
         return ciudades_en_deficit;
@@ -47,7 +59,10 @@ public class Provincia {
         double monto = 0;
         for (int i = 0; i < ciudades.size(); i++) {
 
-            monto += ciudades.get(i).getGastosMantenimiento();
+            if (ciudades.get(i).tieneMinimoDeHabitantes()) { //Se controla que las ciudades cumplan con el mínimo de habitantes
+                
+                monto += ciudades.get(i).getGastosMantenimiento();
+            }
         }
         return monto;
     }
@@ -57,7 +72,10 @@ public class Provincia {
         double monto = 0;
         for (int i = 0; i < ciudades.size(); i++) {
 
-            monto += ciudades.get(i).getMontoRecaudado();
+            if (ciudades.get(i).tieneMinimoDeHabitantes()) { //Se controla que las ciudades cumplan con el mínimo de habitantes
+
+                monto += ciudades.get(i).getMontoRecaudado();
+            }
         }
         return monto;
     }

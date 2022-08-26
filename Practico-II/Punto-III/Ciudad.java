@@ -1,5 +1,7 @@
 public class Ciudad {
     
+    public final int GASTO_MIN_HABITANTES = 100000; //Se controla el gasto público de las ciudades con este mínimo de habitantes
+
     private String nombre;
     private int habitantes;
     private double imp1;
@@ -22,6 +24,14 @@ public class Ciudad {
     }
 
     //Funcionalidades
+    public boolean tieneMinimoDeHabitantes() {
+
+        if (this.habitantes >= GASTO_MIN_HABITANTES) {
+            return true;
+        }
+        return false;
+    }
+
     public double getMontoRecaudado() {
         return this.imp1 + this.imp2 + this.imp3 + this.imp4 + this.imp5;
     }

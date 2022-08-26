@@ -12,6 +12,19 @@ public class Pais {
     }
 
     //Funcionalidades
+    public String getProvinciasConMasDeLaMitadDeDeficit() {
+
+        String provincias_con_deficit = "";
+        for (int i = 0; i < provincias.size(); i++) {
+
+            if (provincias.get(i).masDeLaMitadCiudadesConDeficit()) {
+
+                provincias_con_deficit += "- " + provincias.get(i).getNombre() + " ";
+            }
+        }
+        return provincias_con_deficit;
+    }
+
     public String getCiudadesEnDeficit() {
 
         String ciudades_en_deficit = "";
