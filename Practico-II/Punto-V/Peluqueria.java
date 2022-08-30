@@ -1,10 +1,11 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Peluqueria {
     
     public final double DESCUENTO = 10;
     public final int MIN_MES_SOCIO = 1; //Un mes atrás
+    public final int MAX_HORAS_SOCIO = 12; //Un medio día atrás
 
     private String nombre;
     private ArrayList<Cliente> clientes;
@@ -20,18 +21,79 @@ public class Peluqueria {
     }
 
     //Funcionalidades
-    public double cobrarTurno(Turno t) {
+    public Turno getPrimerTurnoDisponiblePeluquero(Peluquero p) {  //Devuelve el turno de un peluquero en particular más próximo a la fecha actual 
 
-        double precio = t.getPrecio();
-        if (this.clienteEsSocio(t.getCliente())) {
+        Turno primerTurnoDisponible = null;
 
-            precio = precio * (1 - (DESCUENTO / 100));
+        for (Turno turnoLista : turnos) {
+
+            LocalDateTime fechaIni = turnoLista.getFechaInicio();
+
+            if (( fechaIni.isEqual(LocalDateTime.now()) || fechaIni.isAfter(LocalDateTime.now()) ) && turnoLista.getPeluquero().equals(p)) {
+
+                if (primerTurnoDisponible == null) {
+
+                    primerTurnoDisponible = turnoLista;
+                } else if (esFechaMasProxima(fechaIni, primerTurnoDisponible.getFechaInicio())){
+    
+                    primerTurnoDisponible = turnoLista;
+                }
+            }
         }
-        return precio;
+        return primerTurnoDisponible;
     }
 
-    private LocalDate getFechaMinSocio() {
-        return LocalDate.now().minusMonths(MIN_MES_SOCIO);
+    public Turno getPrimerTurnoDisponible() { //Devuelve el turno reservado más próximo a la fecha actual
+
+        Turno primerTurnoDisponible = null;
+
+        for (Turno turnoLista : turnos) {
+
+            LocalDateTime fechaIni = turnoLista.getFechaInicio();
+
+            if (fechaIni.isEqual(LocalDateTime.now()) || fechaIni.isAfter(LocalDateTime.now())) {
+
+                if (primerTurnoDisponible == null) {
+
+                    primerTurnoDisponible = turnoLista;
+                } else if (esFechaMasProxima(fechaIni, primerTurnoDisponible.getFechaInicio())){
+    
+                    primerTurnoDisponible = turnoLista;
+                }
+            }
+        }
+        return primerTurnoDisponible;
+    }
+
+    private boolean esFechaMasProxima(LocalDateTime fecha, LocalDateTime fechaPrimerTurno) { //Devuelve true si el primer parámetro es menor al segundo parámetro o si el segundo parámetro es null
+
+        if (fecha.isBefore(fechaPrimerTurno) || fechaPrimerTurno.equals(null)) {
+            return true;
+        }
+        return false;
+    }
+
+    public double cobrarTurno(Turno t) { //Si no existe el turno ingresado dentro de los turnos de la peluqueria se devuelve -1
+
+        if (turnos.contains(t)) {
+
+            double precio = t.getPrecio();
+            if (this.clienteEsSocio(t.getCliente())) {
+
+                precio = precio * (1 - (DESCUENTO / 100));
+            }
+            return precio;
+        }
+        return -1;
+    }
+
+    //Fechas para ser socio - Entre el mes pasado y medio dia antes del turno que se cobra
+    private LocalDateTime getFechaMinSocio() {
+        return LocalDateTime.now().minusMonths(MIN_MES_SOCIO);
+    }
+
+    private LocalDateTime getFechaMaxSocio() {
+        return LocalDateTime.now().minusHours(MAX_HORAS_SOCIO);
     }
 
     public boolean clienteEsSocio(Cliente c) {
@@ -39,8 +101,12 @@ public class Peluqueria {
         int cantTurnosHechos = 0;
         for (Turno turnoLista : turnos) {
 
-            if (turnoLista.getCliente().equals(c) && turnoLista.getFecha().isAfter(this.getFechaMinSocio())) {
-                cantTurnosHechos++;
+            if (turnoLista.getCliente().equals(c)) {
+
+                if (turnoLista.getFechaInicio().isAfter(this.getFechaMinSocio()) && turnoLista.getFechaInicio().isBefore(getFechaMaxSocio())) {
+
+                    cantTurnosHechos++;
+                }
             }
         }
         return cantTurnosHechos >= 1;
@@ -52,19 +118,16 @@ public class Peluqueria {
 
             if (turnoLista.getPeluquero().equals(t.getPeluquero())) {
 
-                if (turnoLista.getFecha().isEqual(t.getFecha())) {
+                if (t.getFechaInicio().isEqual(turnoLista.getFechaInicio()) || ( t.getFechaInicio().isAfter(turnoLista.getFechaInicio()) && t.getFechaInicio().isBefore(turnoLista.getFechaFin()) )) {
 
-                    if (( !t.getHorario_inicio().isAfter(turnoLista.getHorario_inicio()) && !t.getHorario_inicio().isBefore(turnoLista.getHorario_fin()) ) && ( !t.getHorario_fin().isAfter(turnoLista.getHorario_inicio()) && !t.getHorario_fin().isBefore(turnoLista.getHorario_fin()) )) {
-
-                        return true;
-                    }
+                    return true;
                 }
             }
         }
         return false;
     }
 
-    public void addTurno(Turno t) { //Hay que controlar conflictos
+    public void addTurno(Turno t) {
 
         if (!turnos.contains(t)) {
 
@@ -101,7 +164,6 @@ public class Peluqueria {
 
     @Override
     public String toString() {
-        return "Peluqueria [DESCUENTO=" + DESCUENTO + ", clientes=" + clientes + ", nombre=" + nombre + ", peluqueros="
-                + peluqueros + ", turnos=" + turnos + "]";
+        return "Peluqueria [nombre=" + nombre + ", clientes=" + clientes + ", peluqueros= " + peluqueros + ", turnos=" + turnos + "]";
     }
 }
