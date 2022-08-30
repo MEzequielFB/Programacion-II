@@ -18,6 +18,13 @@ public class Turno {
     }
     
     //Getters
+    public double getPrecio() { //Obtiene precio en base al precio de la cancha y la cantidad de tiempo reservada
+        
+        double precioCancha = this.canchaReservada.getPrecio();
+        double tiempoTurno = horario_fin - horario_inicio;
+        return precioCancha * tiempoTurno;
+    }
+
     public String getNombreUsuario() {
         return usuario.getNombre();
     }

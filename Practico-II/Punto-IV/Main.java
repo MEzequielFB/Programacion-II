@@ -14,7 +14,7 @@ public class Main {
         Cancha c5 = new Cancha("Paddle", 100);
         Cancha c6 = new Cancha("Paddle", 100);
 
-        Turno t1 = new Turno(u2, c1, LocalDate.of(2022, 9, 2), 14, 15.5);
+        Turno t1 = new Turno(u2, c1, LocalDate.of(2022, 9, 2), 14, 14.5);
         Turno t2 = new Turno(u2, c2, LocalDate.of(2022, 9, 2), 14, 15.5);
 
         Turno t3 = new Turno(u2, c2, LocalDate.of(2022, 8, 2), 14, 15.5);

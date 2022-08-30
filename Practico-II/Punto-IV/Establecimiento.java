@@ -25,7 +25,7 @@ public class Establecimiento {
     //Método cobrar turno que use el método UsuarioEsSocio
     public double cobrarTurno(Turno t) {
 
-        double precio = t.getCanchaReservada().getPrecio();
+        double precio = t.getPrecio();
         if (usuarioEsSocio(t.getUsuario())) {
             
             precio = precio * (1 - (DESCUENTO / 100));
