@@ -1,7 +1,5 @@
 public class Empleado {
     
-    public final double sueldoPlus = 100;
-
     private String nombre;
     private int cantEncuestasRealizadas;
     private double sueldo;
@@ -28,7 +26,7 @@ public class Empleado {
     }
 
     public double getSueldo() {
-        return sueldo + (sueldoPlus * cantEncuestasRealizadas);
+        return sueldo;
     }
 
     //Setters

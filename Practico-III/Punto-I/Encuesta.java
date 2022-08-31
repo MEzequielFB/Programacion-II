@@ -14,43 +14,21 @@ public class Encuesta {
     }
 
     //Funcionalidades
-    public void addPregunta(String p) {
+    public void addPregunta(String p) { //Agrega una pregunta si no existe
 
-        if (!existePreguntaEnLista(p)) {
+        if (!preguntas.contains(p)) {
 
             preguntas.add(p);
         }
     }
 
-    private boolean existePreguntaEnLista(String p) {
+    public void addPersona(Persona p) { //Agrega una persona si no hizo esta encuesta e incrementa la cantidad de encuestas realizadas del empleado que la hizo
 
-        for (int i = 0; i < preguntas.size(); i++) {
-
-            if (p.equals(preguntas.get(i))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void addPersona(Persona p) {
-
-        if (!existePersonaEnLista(p)) {
+        if (!personas.contains(p)) {
 
             personas.add(p);
             this.empleado.IncrementCantEncuestasRealizadas();
         }
-    }
-
-    private boolean existePersonaEnLista(Persona p) {
-
-        for (int i = 0; i < personas.size(); i++) {
-
-            if (p.equals(personas.get(i))) {
-                return true;
-            }
-        }
-        return false;
     }
 
     //Getters

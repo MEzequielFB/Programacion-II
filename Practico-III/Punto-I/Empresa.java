@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 public class Empresa {
 
+    public final double sueldoPlus = 100;
+
     private String nombre;
     private ArrayList<Encuesta> encuestas;
     private ArrayList<Empleado> empleados;
@@ -14,40 +16,27 @@ public class Empresa {
     }
 
     //Funcionalidades
+    public double pagarSueldo(Empleado e) { //Calcula el sueldo de un empleado
+
+        if (empleados.contains(e)) { //Si existe el empleado en la lista se calcula
+
+            return e.getSueldo() + (sueldoPlus * e.getCantEncuestasRealizadas());
+        }
+        return -1;
+    }
+
     public void addEncuesta(Encuesta e) { //Agrega la encuesta si es distinta de las ya existentes
 
-        if (!existeEncuestaEnLista(e)) {
+        if (!encuestas.contains(e) && empleados.contains(e.getEmpleado())) { //Si el empleado que hace la encuesta no existe no se agrega la encuesta
             encuestas.add(e);
         }
     }
 
-    public void addEmpleado(Empleado e) {
+    public void addEmpleado(Empleado e) { //Agrega al empleado si no existe en la lista
 
-        if (!existeEmpleadoEnLista(e)) {
+        if (!empleados.contains(e)) {
             empleados.add(e);
         }
-    }
-
-    private boolean existeEncuestaEnLista(Encuesta e) {
-
-        for (int i = 0; i < encuestas.size(); i++) {
-
-            if (e.equals(encuestas.get(i))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean existeEmpleadoEnLista(Empleado e) {
-
-        for (int i = 0; i < empleados.size(); i++) {
-
-            if (e.equals(empleados.get(i))) {
-                return true;
-            }
-        }
-        return false;
     }
 
     //Getters
