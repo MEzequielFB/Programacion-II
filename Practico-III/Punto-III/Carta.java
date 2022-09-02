@@ -8,7 +8,7 @@ public class Carta {
     private int fuerza;
     private int velocidad;
     private int visionNocturna;
-    private boolean jugada;
+    //private boolean jugada;
     
     public Carta(String nombreReal, String nombreHeroe, int edad, double peso, double altura, int fuerza, int velocidad, int visionNocturna) {
 
@@ -20,17 +20,20 @@ public class Carta {
         setFuerza(fuerza);
         setVelocidad(velocidad);
         setVisionNocturna(visionNocturna);
-        this.jugada = false;
+        //this.jugada = false;
     }
 
     //Funcionalidades
-    public void devolverCartaAlMazo() {
+    public boolean esMasFuerte(Carta c) {
+        return this.getFuerza() > c.getFuerza();
+    }
+   /*  public void devolverCartaAlMazo() {
         this.jugada = false;
     }
 
     public void jugarCarta() {
         this.jugada = true;
-    }
+    } */
 
     //Getters
     public String getNombreReal() {
@@ -65,9 +68,9 @@ public class Carta {
         return visionNocturna;
     }
 
-    public boolean getJugada() {
+   /*  public boolean getJugada() {
         return jugada;
-    }
+    } */
 
     //Setters
     public void setNombreReal(String nombreReal) {

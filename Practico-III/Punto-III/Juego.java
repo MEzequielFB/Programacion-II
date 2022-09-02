@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Juego {
 
+    public static final int CANT_RONDAS = 5;
     private String nombre;
     private ArrayList<Jugador> jugadores;
 
@@ -12,7 +13,44 @@ public class Juego {
     }
 
     //Funcionalidades
-    private void compararCartas() {
+    private void incrementPuntos(ArrayList<Carta> cartas, int indexCarta) {
+
+        for (int i = 0; i < jugadores.size(); i++) {
+
+            if (indexCarta == i) {
+                jugadores.get(i).incrementPuntos();
+                return;
+            }
+        }
+    }
+
+    private int getIndexCartaGanadora(ArrayList<Carta> cartas) {
+
+        int index = 0;
+        for (int i = 0; i < cartas.size()-1; i++) {
+
+            if (cartas.get(i).esMasFuerte(cartas.get(i+1))) {
+                index = i;
+            } else {
+                index = i+1;
+            }
+        }
+        return index;
+    }
+
+    public void jugar() {
+
+        ArrayList<Carta> cartasAComparar = new ArrayList<>();
+        for (Jugador jugador : this.jugadores) { //Cada jugador juega una carta random
+
+            Carta cartaJugada = jugador.jugarCartaRandom();
+            cartasAComparar.add(cartaJugada);
+        }
+
+        int indexCarta = this.getIndexCartaGanadora(cartasAComparar); //Se comparan las cartas y se obtiene el índice de la que ganó
+        this.incrementPuntos(cartasAComparar, indexCarta); //Si el índice de la carta que ganó es la misma que el índice de un jugador de la lista, se incrementan sus puntos
+    }
+    /* private void compararCartas() {
         
     }
 
@@ -41,7 +79,7 @@ public class Juego {
             }
             
         }
-    }
+    } */
 
     public void removeJugador(Jugador j) {
 

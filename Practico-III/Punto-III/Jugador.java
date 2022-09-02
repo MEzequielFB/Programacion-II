@@ -14,19 +14,24 @@ public class Jugador {
     }
 
     //Funcionalidades
-    public void devolverCartasAlMazo() { //Setea el boolean 'jugada' de todas las cartas a 'false'
+   /*  public void devolverCartasAlMazo() { //Setea el boolean 'jugada' de todas las cartas a 'false'
 
         for (Carta carta : this.mazo) {
 
             carta.devolverCartaAlMazo();
         }
-    }
+    } */
 
-    public void jugarCarta(Carta c) { //Setea como 'jugada=true' a la carta seleccionada dentro del mazo
+    public Carta jugarCartaRandom() { //Setea como 'jugada=true' a la carta seleccionada dentro del mazo
 
-        if (this.mazo.contains(c)) {
-            c.jugarCarta();
-        }
+        int numeroRandom = (int) Math.random() * mazo.size();
+        Carta cartaAJugar = mazo.get(numeroRandom);
+
+        /* if (this.mazo.contains(cartaAJugar)) {
+
+            cartaAJugar.jugarCarta();
+        } */
+        return cartaAJugar;
     }
 
     public void incrementPuntos() {
