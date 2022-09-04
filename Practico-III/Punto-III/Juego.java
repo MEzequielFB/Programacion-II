@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Juego {
 
-    public static final int CANT_RONDAS = 5;
+    //public static final int CANT_RONDAS = 5;
     private String nombre;
     private ArrayList<Jugador> jugadores;
 
@@ -13,73 +13,105 @@ public class Juego {
     }
 
     //Funcionalidades
-    private void incrementPuntos(ArrayList<Carta> cartas, int indexCarta) {
+    private Jugador getGanador() { //Obtiene al ganador del juego. Devuelve null si hay empate
 
-        for (int i = 0; i < jugadores.size(); i++) {
+        Jugador ganador = null;
+        for (int i = 0; i < this.jugadores.size()-1; i++) {
 
-            if (indexCarta == i) {
-                jugadores.get(i).incrementPuntos();
-                return;
+            if (this.jugadores.get(i).getPuntos() > this.jugadores.get(i+1).getPuntos()) {
+
+                ganador = this.jugadores.get(i);
+            } else if (this.jugadores.get(i).getPuntos() < this.jugadores.get(i+1).getPuntos()) {
+
+                ganador = this.jugadores.get(i+1);
+            }
+        }
+        return ganador;
+    }
+
+    private boolean compararAtributoCartas(int numero , Carta c1, Carta c2) {
+
+        switch(numero) {
+            case 0: {
+                System.out.println("Fuerza");
+                return c1.esMasFuerte(c2);
+            }
+            case 1: {
+                System.out.println("Velocidad");
+                return c1.esMasRapido(c2);
+            }
+            case 2: {
+                System.out.println("Visión nocturna");
+                return c1.tieneMejorVisionNocturna(c2);
+            }
+            default: {
+                return false;
             }
         }
     }
 
-    private int getIndexCartaGanadora(ArrayList<Carta> cartas) {
+    private void incrementPuntos(ArrayList<Carta> cartas) {
 
-        int index = 0;
+        int index = -1;
+        int numeroRandom = (int) (Math.random() * 3);
+
         for (int i = 0; i < cartas.size()-1; i++) {
 
-            if (cartas.get(i).esMasFuerte(cartas.get(i+1))) {
+            if (compararAtributoCartas(numeroRandom, cartas.get(i), cartas.get(i+1))) {
+
                 index = i;
-            } else {
-                index = i+1;
+            } else if (compararAtributoCartas(numeroRandom, cartas.get(i+1), cartas.get(i))) {
+
+                index = i + 1;
             }
         }
-        return index;
+        if (index != -1) {
+
+            jugadores.get(index).incrementPuntos();
+        }
     }
 
-    public void jugar() {
+    private boolean tienenMismaCantDeCartas() { //Devuelve true si todos los jugadores tienen la misma cantidad de cartas en el mazo
 
+        for (int i = 0; i < this.jugadores.size()-1; i++) { 
+
+            if (this.jugadores.get(i).getMazo().size() != this.jugadores.get(i+1).getMazo().size()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private int getCantRondas() {
+        return this.jugadores.get(0).getMazo().size();
+    }
+
+    public Jugador jugar() {
+
+        Jugador ganador = null;
         ArrayList<Carta> cartasAComparar = new ArrayList<>();
-        for (Jugador jugador : this.jugadores) { //Cada jugador juega una carta random
-
-            Carta cartaJugada = jugador.jugarCartaRandom();
-            cartasAComparar.add(cartaJugada);
-        }
-
-        int indexCarta = this.getIndexCartaGanadora(cartasAComparar); //Se comparan las cartas y se obtiene el índice de la que ganó
-        this.incrementPuntos(cartasAComparar, indexCarta); //Si el índice de la carta que ganó es la misma que el índice de un jugador de la lista, se incrementan sus puntos
-    }
-    /* private void compararCartas() {
         
-    }
+        if (this.tienenMismaCantDeCartas()) { //Verifica que todos los jugadores tengan la misma cantidad de cartas
 
-    public void jugar() {
+            int cantRondas = this.getCantRondas(); //Obtiene la cantidad de rondas (cantidad de cartas de jugador)
 
-        int tamanioMazo = 0;
+            for (int i = 0; i < cantRondas; i++) { //Se juegan las rondas
 
-        for (Jugador jugador : this.jugadores) {
+                cartasAComparar.clear(); //Vacía la lista para la próxima ronda
+                for (Jugador jugador : this.jugadores) { //Cada jugador juega una carta random y se agrega a la lista de cartas a jugar
 
-            tamanioMazo = jugador.getMazo().size(); //Si el tamanio de alguno de los mazos de todos los jugadores es distinto no se puede jugar
-            for (int i = 0; i < jugadores.size()-1; i++) {
-
-                if (tamanioMazo != this.jugadores.get(i+1).getMazo().size()) {
-
-                    System.out.println("Distintos tamanios de mazo. No se puede jugar");
-                    return;
+                    Carta cartaJugada = jugador.jugarCartaRandom();
+                    cartasAComparar.add(cartaJugada);
                 }
+        
+                System.out.println(cartasAComparar.get(0).getNombreHeroe() + " vs " + cartasAComparar.get(1).getNombreHeroe());
+
+                this.incrementPuntos(cartasAComparar); //Compara las cartas jugadas e incrementa los puntos al jugador con la carta ganadora
             }
-
-            ArrayList<Carta> cartasAJugar = new ArrayList<>();
-            for (Jugador j : this.jugadores) {
-
-                int cartaIndex = (int) (Math.random() * tamanioMazo-1);
-
-                cartasAJugar.add(j.getMazo().get(cartaIndex));
-            }
-            
+            ganador = this.getGanador(); //Obtiene al ganador
         }
-    } */
+        return ganador; //Devuelve al ganador
+    }
 
     public void removeJugador(Jugador j) {
 

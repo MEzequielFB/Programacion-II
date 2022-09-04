@@ -24,6 +24,7 @@ public class Main {
         juego1.addJugador(j2);
 
         //Prints
-        System.out.println(juego1);
+        System.out.println(juego1 + "\n");
+        System.out.println("Ganador: " + juego1.jugar());
     }
 }

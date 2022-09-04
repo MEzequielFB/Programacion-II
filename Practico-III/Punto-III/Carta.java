@@ -24,9 +24,18 @@ public class Carta {
     }
 
     //Funcionalidades
-    public boolean esMasFuerte(Carta c) {
-        return this.getFuerza() > c.getFuerza();
+    public boolean tieneMejorVisionNocturna(Carta c) {
+        return this.visionNocturna > c.getVisionNocturna();
     }
+
+    public boolean esMasRapido(Carta c) {
+        return this.velocidad > c.getVelocidad();
+    }
+
+    public boolean esMasFuerte(Carta c) {
+        return this.fuerza > c.getFuerza();
+    }
+
    /*  public void devolverCartaAlMazo() {
         this.jugada = false;
     }

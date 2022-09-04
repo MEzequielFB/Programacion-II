@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 public class Jugador {
     
+    public static final int CANT_CARTAS_REP_PERMITIDAS = 2;
+    public static final int MAXIMO_CARTAS = 5;
+
     private String nombre;
     private int puntos;
     private ArrayList<Carta> mazo;
@@ -24,7 +27,7 @@ public class Jugador {
 
     public Carta jugarCartaRandom() { //Setea como 'jugada=true' a la carta seleccionada dentro del mazo
 
-        int numeroRandom = (int) Math.random() * mazo.size();
+        int numeroRandom = (int) (Math.random() * mazo.size());
         Carta cartaAJugar = mazo.get(numeroRandom);
 
         /* if (this.mazo.contains(cartaAJugar)) {
@@ -50,8 +53,7 @@ public class Jugador {
     public void addCarta(Carta c) {
 
         int cont = 0;
-        int cantCartasRepPermitidas = 2;
-        int maximo = 5;
+        
 
         for (Carta carta : this.mazo) {
 
@@ -63,7 +65,7 @@ public class Jugador {
         //Si no existe la carta en el mazo agrega la carta pasada como parámetro
         //Si existe un carta igual a la pasada por parámetro, se crea una nueva carta con los mismos valores
         //Se crea una nueva carta para que no se setee 'jugada=true' en ambas cartas al jugar una sola
-        if (cont < cantCartasRepPermitidas && this.mazo.size() < maximo) {
+        if (cont < CANT_CARTAS_REP_PERMITIDAS && this.mazo.size() < MAXIMO_CARTAS) {
 
             if (cont > 0) {
 
@@ -77,6 +79,14 @@ public class Jugador {
     }
 
     //Getters
+    public static int getMaximoCartas() {
+        return MAXIMO_CARTAS;
+    }
+
+    public static int getCartasRepPermitidas() {
+        return CANT_CARTAS_REP_PERMITIDAS;
+    }
+
     public String getNombre() {
         return nombre;
     }
