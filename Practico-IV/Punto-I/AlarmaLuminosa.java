@@ -24,6 +24,10 @@ public class AlarmaLuminosa extends Alarma {
 
         this.getTimbre().parar();
         this.luz.apagar();
+
+        this.setVidrioRoto(false);
+        this.setPuertaVentanaAbierta(false);
+        this.setHayMovimiento(false);
     }
 
     public boolean estaEncendida() {

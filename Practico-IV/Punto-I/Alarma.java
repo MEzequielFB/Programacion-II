@@ -24,6 +24,9 @@ public class Alarma {
 
     public void parar() {
         this.timbre.parar();
+        this.vidrioRoto = false;
+        this.puertaVentanaAbierta = false;
+        this.hayMovimiento = false;
     }
 
     //Getters
