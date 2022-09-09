@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 public class Establecimiento {
 
-    public final int CANT_TURNOS_SOCIO = 4;
-    public final int MIN_MESES_ANTES = 2;
-    public final double DESCUENTO = 10; //%
+    private static final int CANT_TURNOS_SOCIO = 4;
+    private static final int MIN_MESES_ANTES = 2;
+    private static final double DESCUENTO = 10; //%
 
     private String nombre;
     private ArrayList<Cancha> canchas;
@@ -37,7 +37,7 @@ public class Establecimiento {
         return LocalDate.now().minusMonths(MIN_MESES_ANTES); //Dos meses menos al actual
     }
 
-    public boolean usuarioEsSocio(Usuario u) {
+    private boolean usuarioEsSocio(Usuario u) {
 
         int turnosHechos = 0;
         for (int i = 0; i < turnos.size(); i++) {
@@ -61,7 +61,7 @@ public class Establecimiento {
         }
     }
 
-    public boolean hayConflictoTurnos(Turno t) {
+    private boolean hayConflictoTurnos(Turno t) {
 
         for (int i = 0; i < turnos.size(); i++) {
 
