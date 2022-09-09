@@ -21,6 +21,10 @@ public class Contacto {
     }
 
     //Funcionalidades
+    public boolean ocupanMismoEspacio(Object o) {
+        return this == o;
+    }
+
     public int getEdad() {
         return Period.between(this.fecha_nacimiento, LocalDate.now()).getYears();
     }

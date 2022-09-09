@@ -12,21 +12,28 @@ public class Celular {
     }
 
     //Funcionalidades
-    public ArrayList<Contacto> getListaContactosRepetidos() { //Devuelve todos los contactos con sus repetidos
-        
+    private boolean contieneContactoConMismoEspacio(ArrayList<Contacto> lista, Contacto contactoParam) {
+
+        for (Contacto contacto : lista) {
+
+            if (contacto.ocupanMismoEspacio(contactoParam)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<Contacto> getListaContactosRepetidos() { //Devuelve una lista con contactos que tienen repetidos
+
         ArrayList<Contacto> contactos_repetidos = new ArrayList<>();
-        for (int i = 0; i < contactos.size()-1; i++) {
+        for (int i = 0; i < this.contactos.size(); i++) {
 
-            for (int j = i+1; j < contactos.size(); j++) {
+            for (int j = 0; j < this.contactos.size(); j++) {
 
-                if (contactos.get(i).getTelefono() == contactos.get(j).getTelefono()) {
+                //Si j e i son iguales Y j e i no ocupan mismo espacio en memoria Y contactos_repetidos no contiene un contacto que contenga mismo espacio en memoria que el que se pasa por parámetro -> Se agrega el contacto a la lista de contactos repetidos
+                if (this.contactos.get(i).equals(this.contactos.get(j)) && !this.contactos.get(i).ocupanMismoEspacio(this.contactos.get(j)) && !contieneContactoConMismoEspacio(contactos_repetidos, this.contactos.get(i))) {
 
-                    if (!contactos_repetidos.contains(contactos.get(i))) {
-
-                        contactos_repetidos.add(contactos.get(i));
-                    }
-
-                    contactos_repetidos.add(contactos.get(j));
+                    contactos_repetidos.add(this.contactos.get(i));
                 }
             }
         }
