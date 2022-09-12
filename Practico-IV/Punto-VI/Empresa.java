@@ -12,6 +12,10 @@ public class Empresa {
     }
 
     //Funcionalidades
+    public boolean trabajaEnLaEmpesa(Empleado e) {
+        return this.personas.contains(e);
+    }
+
     public String getInfoPersonas() {
 
         String info_personas = "";

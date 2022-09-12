@@ -22,4 +22,11 @@ public class Empleado extends Persona {
     public double getSueldo() {
         return sueldo;
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        Empleado otroEmpleaado = (Empleado) o;
+        return this.nro_legajo == otroEmpleaado.getNroLegajo();
+    }
 }

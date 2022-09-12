@@ -17,6 +17,10 @@ public class Main {
         empresa1.addPersona(j1);
         empresa1.addPersona(u1);
 
+        j1.addEmpleado(e1, empresa1);
+        j1.addEmpleado(e2, empresa1);
+        j1.addEmpleado(e3, empresa1);
+
         System.out.println(empresa1.getInfoPersonas());
     }
 }

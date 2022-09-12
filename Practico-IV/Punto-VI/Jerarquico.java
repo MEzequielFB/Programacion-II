@@ -9,4 +9,12 @@ public class Jerarquico extends Empleado {
         super(nombre, apellido, edad, sueldo);
         this.empleados_a_cargo = new ArrayList<>();
     }
+
+    //Funcionalidades
+    public void addEmpleado(Empleado e, Empresa empresa) {
+
+        if (!this.empleados_a_cargo.contains(e) && empresa.trabajaEnLaEmpesa(e)) {
+            this.empleados_a_cargo.add(e);
+        }
+    }
 }
