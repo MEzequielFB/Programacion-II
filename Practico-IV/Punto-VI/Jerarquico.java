@@ -13,7 +13,7 @@ public class Jerarquico extends Empleado {
     //Funcionalidades
     public void addEmpleado(Empleado e, Empresa empresa) {
 
-        if (!this.empleados_a_cargo.contains(e) && empresa.trabajaEnLaEmpesa(e)) {
+        if (!this.empleados_a_cargo.contains(e) && empresa.trabajaEnLaEmpesa(e) && empresa.trabajaEnLaEmpesa(this)) {
             this.empleados_a_cargo.add(e);
         }
     }
