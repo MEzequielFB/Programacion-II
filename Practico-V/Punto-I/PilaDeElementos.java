@@ -10,41 +10,58 @@ public class PilaDeElementos {
     }
 
     //Funcionalidades
+    public PilaDeElementos reverse() {
+
+        PilaDeElementos copiaPilaInvertida = new PilaDeElementos();
+        for (int i = this.size()-1; i >= 0; i--) {
+
+            copiaPilaInvertida.push(this.elementos[i]);
+        }
+        return copiaPilaInvertida;
+    }
+
+    public PilaDeElementos copy() {
+
+        PilaDeElementos copiaPila = new PilaDeElementos();
+        for (Object elemento : this.elementos) {
+
+            copiaPila.push(elemento);
+        }
+        return copiaPila;
+    }
+
     public int size() {
         return this.elementos.length;
     }
 
     private void disminuirPila() {
 
-        /* if (this.ultimaPos > 0) { */
+        Object [] nuevaPila = new Object[this.elementos.length - 1];
+        for (int i = 0; i < nuevaPila.length; i++) {
 
-            Object [] nuevaPila = new Object[this.elementos.length - 1];
-            for (int i = 0; i < nuevaPila.length; i++) {
-
-                nuevaPila[i] = this.elementos[i];
-            }
-            this.actualizarAtributos(nuevaPila);
-        /* } else {
-
-            this.elementos[this.ultimaPos] = null;
-        } */
+            nuevaPila[i] = this.elementos[i];
+        }
+        this.actualizarAtributos(nuevaPila);
     }
 
     public Object top() {
 
-        /* if (this.elementos[this.ultimaPos] != null) { */
-        
+        if (this.size() > 0) {
             return this.elementos[this.ultimaPos];
-        /* }
-        return null; */
+        }
+        return null;
     }
 
     public Object pop() {
 
-        Object ultimoElemento = this.top();
-        this.disminuirPila();
+        if (this.size() > 0) {
 
-        return ultimoElemento;
+            Object ultimoElemento = this.top();
+            this.disminuirPila();
+
+            return ultimoElemento;
+        }
+        return null;
     }
 
     private void actualizarAtributos(Object [] pila) {
@@ -69,6 +86,9 @@ public class PilaDeElementos {
 
     public void push(Object o) {
         
+        if (this.size() == 0) {
+            this.expandirPila();
+        }
         if (hayEspacio()) {
 
             this.elementos[this.ultimaPos] = o;
