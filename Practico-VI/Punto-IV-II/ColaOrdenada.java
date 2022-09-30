@@ -1,21 +1,51 @@
-public abstract class ColaOrdenada extends ColaDeProcesos {
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class ColaOrdenada {
     
-    @Override
-    public void addProceso(Proceso nuevo_proceso) {
+    private ArrayList<Comparable> elementos;
 
-        if (!this.procesos.contains(nuevo_proceso)) {
+    public ColaOrdenada() {
+        this.elementos = new ArrayList<>();
+    }
 
-            for (Proceso proceso : this.procesos) {
+    public boolean contieneElemento(Comparable elemento) {
+        return this.elementos.contains(elemento);
+    }
 
-                if (this.esMayor(nuevo_proceso, proceso)) {
+    public boolean estaVacia() {
+        return elementos.isEmpty();
+    }
 
-                    this.procesos.add(this.procesos.indexOf(proceso), nuevo_proceso);
+    public Comparable getPrimerElemento() {
+
+        if (!this.elementos.isEmpty()) {
+
+            return this.elementos.remove(0);
+        }
+        return null;
+    }
+
+    public void addElemento(Comparable nuevo_elemento) {
+
+        if (!this.elementos.contains(nuevo_elemento)) {
+
+            /* for (Comparable elemento : this.elementos) {
+
+                if (nuevo_elemento.compareTo(elemento) > 0) {
+
+                    this.elementos.add(this.elementos.indexOf(elemento), nuevo_elemento);
                     return;
                 }
-            }
-            this.procesos.add(nuevo_proceso);
+            } */
+            this.elementos.add(nuevo_elemento);
+            Collections.sort(this.elementos, Collections.reverseOrder());
+            //Collections.sort ordena por default de menor a mayor teniendo en cuenta el compareTo del elemento. Con Collections.reverseOrder() se revierte de mayor de menor
         }
     }
 
-    public abstract boolean esMayor(Proceso proceso1, Proceso proceso2);
+    @Override
+    public String toString() {
+        return "ColaOrdenada [elementos=" + elementos + "]";
+    }
 }

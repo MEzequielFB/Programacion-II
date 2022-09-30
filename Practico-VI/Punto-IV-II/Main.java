@@ -5,12 +5,10 @@ public class Main {
         Proceso p2 = new Proceso(20);
         Proceso p3 = new Proceso(15);
 
-        Computadora c1 = new Computadora();
-        Computadora c2 = new Computadora();
+        Computadora c1 = new Computadora(4);
+        Computadora c2 = new Computadora(10);
 
-        ColaDeProcesosPorMemoria cola1 = new ColaDeProcesosPorMemoria();
-
-        CentroComputos centro_computos1 = new CentroComputos(cola1);
+        CentroComputos centro_computos1 = new CentroComputos();
 
         centro_computos1.addComputadora(c1);
         centro_computos1.addComputadora(c2);

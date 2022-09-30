@@ -1,41 +1,41 @@
-import java.util.ArrayList;
-
 public class CentroComputos {
     
-    private ArrayList<Computadora> computadoras;
-    private ColaDeProcesos cola_procesos;
+    private ColaOrdenada cola_computadoras;
+    private ColaOrdenada cola_procesos;
 
-    public CentroComputos(ColaDeProcesos cola_procesos) {
-
-        this.computadoras = new ArrayList<>();
-        this.cola_procesos = cola_procesos;
+    public CentroComputos() {
+        this.cola_computadoras = new ColaOrdenada();
+        this.cola_procesos = new ColaOrdenada();
     }
 
     //Funcionalidades
     public void ejecutarProcesos() {
 
-        for (Computadora computadora : this.computadoras) {
+        while (!cola_computadoras.estaVacia() && !cola_procesos.estaVacia()) {
 
-            if (computadora.estaDisponible() && !this.cola_procesos.estaVacia()) {
-
-                computadora.setProcesoEjecutado(this.cola_procesos.getPrimerProceso());
+            Computadora computadora = (Computadora) this.cola_computadoras.getPrimerElemento();
+            if (computadora.estaDisponible()) {
+                computadora.setProcesoEjecutado((Proceso) this.cola_procesos.getPrimerElemento());
             }
         }
     }
 
     public void addProceso(Proceso proceso) {
-        this.cola_procesos.addProceso(proceso);
+
+        if (!this.cola_procesos.contieneElemento(proceso)) {
+            this.cola_procesos.addElemento(proceso);
+        }
     }
 
     public void addComputadora(Computadora computadora) {
 
-        if (!this.computadoras.contains(computadora)) {
-            this.computadoras.add(computadora);
+        if (!this.cola_computadoras.contieneElemento(computadora)) {
+            this.cola_computadoras.addElemento(computadora);
         }
     }
 
     @Override
     public String toString() {
-        return "CentroComputos [cola_procesos=" + cola_procesos + ", computadoras=" + computadoras + "]";
+        return "CentroComputos [cola_procesos=" + cola_procesos + ", cola_computadoras=" + cola_computadoras + "]";
     }
 }

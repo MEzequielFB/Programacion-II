@@ -1,4 +1,4 @@
-public class Proceso {
+public class Proceso implements Comparable<Proceso> {
     
     private static int contador;
 
@@ -37,5 +37,16 @@ public class Proceso {
     @Override
     public String toString() {
         return "Proceso [id=" + id + ", memoria=" + memoria + "]";
+    }
+
+    @Override
+    public int compareTo(Proceso otroProceso) {
+        if (this.getMemoria() > otroProceso.getMemoria()) {
+            return 1;
+        }
+        else if (this.getMemoria() < otroProceso.getMemoria()) {
+            return -1;
+        }
+        return 0;
     }
 }

@@ -1,13 +1,15 @@
-public class Computadora {
+public class Computadora implements Comparable<Computadora> {
     
     private static int contador;
 
     private int id;
+    private int velocidad;
     private Proceso proceso_ejecutado;
 
-    public Computadora() {
+    public Computadora(int velocidad) {
 
         this.id = contador;
+        this.velocidad = velocidad;
         this.proceso_ejecutado = null;
 
         contador++;
@@ -16,6 +18,10 @@ public class Computadora {
     //Getters
     public int getId() {
         return this.id;
+    }
+
+    public int getVelocidad() {
+        return this.velocidad;
     }
 
     public boolean estaDisponible() {
@@ -41,6 +47,17 @@ public class Computadora {
 
     @Override
     public String toString() {
-        return "Computadora [id=" + id + ", proceso_ejecutado=" + proceso_ejecutado + "]";
+        return "Computadora [id=" + id + ", velocidad= " + velocidad + ", proceso_ejecutado=" + proceso_ejecutado + "]";
+    }
+
+    @Override
+    public int compareTo(Computadora otraComputadora) {
+        if (this.getVelocidad() > otraComputadora.getVelocidad()) {
+            return 1;
+        }
+        else if (this.getVelocidad() < otraComputadora.getVelocidad()) {
+            return -1;
+        }
+        return 0;
     }
 }
