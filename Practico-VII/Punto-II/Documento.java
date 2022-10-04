@@ -16,6 +16,22 @@ public class Documento {
     }
 
     //Funcionalidades
+    public boolean tieneMinimaCantidadPalabras(int cantidad_palabras) {
+        return this.contenido_textual.split(" ").length >= cantidad_palabras;
+    }
+
+    public boolean contieneAutor(String autor) {
+        return this.autores.contains(autor);
+    }
+
+    public boolean tienePalabrasClave() {
+        return this.palabras_clave.size() > 0;
+    }
+
+    public boolean contienePalabraClave(String palabra_clave) {
+        return this.palabras_clave.contains(palabra_clave);
+    }
+
     public void addPalabraClave(String palabra_clave) {
 
         if (!this.palabras_clave.contains(palabra_clave)) {

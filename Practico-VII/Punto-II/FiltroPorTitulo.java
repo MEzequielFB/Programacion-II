@@ -6,8 +6,14 @@ public class FiltroPorTitulo implements Filtro {
         this.titulo = titulo;
     }
 
+    //Funcionalidades
     @Override
     public boolean cumple(Documento documento) {
         return documento.getTitulo().equalsIgnoreCase(this.titulo);
+    }
+
+    //Getters
+    public String getTitulo() {
+        return this.titulo;
     }
 }
