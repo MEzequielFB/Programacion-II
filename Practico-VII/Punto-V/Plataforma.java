@@ -3,9 +3,12 @@ import java.util.ArrayList;
 public class Plataforma {
     
     private ArrayList<Pelicula> peliculas;
+    private Filtro preferencia;
 
-    public Plataforma() {
+    public Plataforma(Filtro preferencia) {
+
         this.peliculas = new ArrayList<>();
+        this.preferencia = preferencia;
     }
 
     //Funcionalidades
@@ -23,8 +26,18 @@ public class Plataforma {
 
     public void addPelicula(Pelicula pelicula) {
 
-        if (!this.peliculas.contains(pelicula)) {
+        if (!this.peliculas.contains(pelicula) && this.preferencia.cumple(pelicula)) {
             this.peliculas.add(pelicula);
         }
+    }
+
+    //Setters
+    public void setPreferencia(Filtro preferencia) {
+        this.preferencia = preferencia;
+    }
+
+    @Override
+    public String toString() {
+        return "Plataforma [peliculas=" + peliculas + "]";
     }
 }
