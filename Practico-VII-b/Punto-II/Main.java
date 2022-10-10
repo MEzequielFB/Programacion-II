@@ -15,13 +15,15 @@ public class Main {
 
         comboP1.addEnvio(envioP1);
         comboP1.addEnvio(envioP2);
-        comboP1.addEnvio(envioC1);
+        comboP1.addEnvio(envioC1); //No lo agrega porque no tiene mismo destino que el primer envio
 
         comboP2.addEnvio(comboP1);
         comboP2.addEnvio(envioC2);
 
         System.out.println(comboP1);
         System.out.println(comboP2);
+        System.out.println("Destinatario comboP1 " + comboP1.getDestinatario());
+        System.out.println("Destinatario envioC2: " + envioC2.getDestinatario());
         System.out.println("Cantidad de envios de comboP1: " + comboP1.getCantidadEnvios());
         System.out.println("Cantidad de envios de comboP2: " + comboP2.getCantidadEnvios());
         System.out.println("Peso comboP1: " + comboP1.getPeso());

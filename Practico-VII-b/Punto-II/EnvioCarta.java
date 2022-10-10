@@ -1,30 +1,30 @@
 public class EnvioCarta extends Envio {
 
-    private Persona destinatario;
     private Persona remitente;
+    private Persona destinatario;
     private String metodo_retiro;
 
-    public EnvioCarta(Persona destinatario, Persona remitente, String metodo_retiro) {
+    public EnvioCarta(Persona remitente, Persona destinatario, String metodo_retiro) {
         
-        this.destinatario = destinatario;
         this.remitente = remitente;
+        this.destinatario = destinatario;
         this.metodo_retiro = metodo_retiro;
     }
 
     //Getters
-    @Override
-    public Persona getDestinatario() {
-        return this.destinatario;
-    }
-
     @Override
     public Persona getRemitente() {
         return this.remitente;
     }
 
     @Override
+    public Persona getDestinatario() {
+        return this.destinatario;
+    }
+
+    @Override
     public double getPeso() {
-        return 0.1;
+        return 0.1; //Por que no suma
     }
 
     @Override

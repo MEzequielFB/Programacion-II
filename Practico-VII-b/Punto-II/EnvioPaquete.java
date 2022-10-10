@@ -1,27 +1,27 @@
 public class EnvioPaquete extends Envio {
 
-    private Persona destinatario;
     private Persona remitente;
+    private Persona destinatario;
     private double peso;
     private String metodo_retiro;
 
-    public EnvioPaquete(Persona destinatario, Persona remitente, String metodo_retiro, double peso) {
+    public EnvioPaquete(Persona remitente, Persona destinatario, String metodo_retiro, double peso) {
 
-        this.destinatario = destinatario;
         this.remitente = remitente;
+        this.destinatario = destinatario;
         this.peso = peso;
         this.metodo_retiro = metodo_retiro;
     }
 
     //Getters
     @Override
-    public Persona getDestinatario() {
-        return this.destinatario;
+    public Persona getRemitente() {
+        return this.remitente;
     }
 
     @Override
-    public Persona getRemitente() {
-        return this.remitente;
+    public Persona getDestinatario() {
+        return this.destinatario;
     }
 
     @Override
