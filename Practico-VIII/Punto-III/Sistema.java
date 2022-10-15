@@ -5,7 +5,10 @@ public class Sistema {
     private ArrayList<Buzon> buzones;
     private ArrayList<Carta> cartas_guardadas;
 
-    public Sistema() {
+    //No se si se pueden abstraer los barrios, localidades, provincias y paises
+    //No se como y donde implementar los servicios
+
+    public Sistema() { 
         this.buzones = new ArrayList<>();
         this.cartas_guardadas = new ArrayList<>();
     }
