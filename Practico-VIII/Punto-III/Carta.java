@@ -12,6 +12,10 @@ public class Carta {
     }
 
     //Funcionalidades
+    public boolean contieneRegalo(String regalo) {
+        return this.regalos_solicitados.contains(regalo);
+    }
+
     public void vaciarCarta() {
         this.regalos_solicitados.clear();
     }
@@ -35,5 +39,10 @@ public class Carta {
         catch(Exception exc) {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Carta: remitente=" + this.getRemitente();
     }
 }

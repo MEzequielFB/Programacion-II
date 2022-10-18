@@ -2,29 +2,69 @@ import java.util.ArrayList;
 
 public class Sistema {
     
-    private ArrayList<Buzon> buzones;
+    private ArrayList<ElementoNavidad> elementos_navidad;
     private ArrayList<Carta> cartas_guardadas;
 
-    //No se si se pueden abstraer los barrios, localidades, provincias y paises
-    //No se como y donde implementar los servicios
-
     public Sistema() { 
-        this.buzones = new ArrayList<>();
+        this.elementos_navidad = new ArrayList<>();
         this.cartas_guardadas = new ArrayList<>();
     }
 
     //Funcionalidades
+    public int getCantidadCartasPorRegalo(ElementoNavidad elemento_navidad, String regalo) {
+
+        if (this.elementos_navidad.contains(elemento_navidad)) {
+            return elemento_navidad.getCantidadCartasPorRegalo(regalo);
+        }
+        return -1;
+    }
+
+    public double getPorcentajeCartasPorRegalo(ElementoNavidad elemento_navidad, String regalo) {
+
+        if (this.elementos_navidad.contains(elemento_navidad)) {
+            return elemento_navidad.getPorcentajeCartasPorRegalo(regalo);
+        }
+        return -1;
+    }
+
+    public int getCantidadNiniosMalos(ElementoNavidad elemento_navidad) {
+
+        if (this.elementos_navidad.contains(elemento_navidad)) {
+            return elemento_navidad.getCantidadNiniosMalos();
+        }
+        return -1;
+    }
+
+    public int getCantCartasRecibidas(ElementoNavidad elemento_navidad) {
+
+        if (this.elementos_navidad.contains(elemento_navidad)) {
+            return elemento_navidad.getCantCartasRecibidas();
+        }
+        return -1;
+    }
+
     public void guardarCartas() {
 
-        for (Buzon buzon : this.buzones) {
-            this.cartas_guardadas.addAll(buzon.getCartasValidas());
+        for (ElementoNavidad elemento_navidad : this.elementos_navidad) {
+            /* this.cartas_guardadas.addAll(elemento_navidad.getCartasValidas()); */
+            for (Carta carta : elemento_navidad.getCartasValidas()) {
+
+                if (!this.cartas_guardadas.contains(carta)) {
+                    this.cartas_guardadas.add(carta);
+                }
+            }
         }
     }
 
-    public void addBuzon(Buzon buzon) {
+    public void addElementoNavidad(ElementoNavidad elemento_navidad) {
 
-        if (!this.buzones.contains(buzon)) {
-            this.buzones.add(buzon);
+        if (!this.elementos_navidad.contains(elemento_navidad)) {
+            this.elementos_navidad.add(elemento_navidad);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Sistema: " + this.cartas_guardadas;
     }
 }

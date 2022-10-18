@@ -4,14 +4,11 @@ public class Ninio {
     
     private String nombre;
     private String dni;
-    private Barrio barrio;
     private ArrayList<Carta> cartas;
 
-    public Ninio(String nombre, String dni, Barrio barrio) {
-
+    public Ninio(String nombre, String dni) {
         this.nombre = nombre;
         this.dni = dni;
-        this.barrio = barrio;
         this.cartas = new ArrayList<>();
     }
 
@@ -29,10 +26,6 @@ public class Ninio {
         return this.dni;
     }
 
-    public Barrio getBarrio() {
-        return this.barrio;
-    }
-
     @Override
     public boolean equals(Object o) {
 
@@ -43,5 +36,10 @@ public class Ninio {
         catch(Exception exc) {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.getNombre();
     }
 }
