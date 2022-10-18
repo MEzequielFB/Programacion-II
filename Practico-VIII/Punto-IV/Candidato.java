@@ -22,4 +22,21 @@ public class Candidato {
     public String getAgrupacion() {
         return this.agrupacion;
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        try {
+            Candidato otroCandidato = (Candidato) o;
+            return this.getNombre().equalsIgnoreCase(otroCandidato.getNombre()) && this.getPartidoPolitico().equalsIgnoreCase(otroCandidato.getPartidoPolitico());
+        }
+        catch(Exception exc) {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
 }
