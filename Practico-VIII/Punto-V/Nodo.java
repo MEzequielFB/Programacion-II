@@ -4,16 +4,24 @@ public class Nodo implements Comparable<Nodo> {
     private Nodo nodo_padre;
     private Nodo nodo_izquierda;
     private Nodo nodo_derecha;
-    private ComportamientoNodo comportamiento_nodo;
 
-    public Nodo(int valor, Nodo nodo_izquierda, Nodo nodo_derecha, ComportamientoNodo compormiento_nodo) {
+    public Nodo(int valor, Nodo nodo_izquierda, Nodo nodo_derecha) {
         this.valor = valor;
         setNodoIzquierda(nodo_izquierda);
         setNodoDerecha(nodo_derecha);
-        this.comportamiento_nodo = compormiento_nodo;
     }
 
     //Funcionalidades
+    public void recorrer(AccionEjecutable comportamiento) {
+        if (nodo_izquierda != null) {
+            nodo_izquierda.recorrer(comportamiento);
+        }
+        comportamiento.ejecutarNodo(this);
+        if (nodo_derecha != null) {
+            nodo_derecha.recorrer(comportamiento);
+        }
+    }
+
     public boolean esHoja() {
         if (this.nodo_izquierda == null && this.nodo_derecha == null) {
             return true;
@@ -74,7 +82,8 @@ public class Nodo implements Comparable<Nodo> {
         }
     }
 
-    public void setComportamientoNodo(ComportamientoNodo comportamiento_nodo) {
-        this.comportamiento_nodo = comportamiento_nodo;
+    @Override
+    public String toString() {
+        return this.valor + "";
     }
 }
