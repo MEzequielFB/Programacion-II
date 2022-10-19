@@ -6,10 +6,10 @@ public class Voto {
     private Candidato candidato_votado;
     private LocalTime horario_emision;
 
-    public Voto(Votante votante, Candidato candidato_votado) {
+    public Voto(Votante votante, Candidato candidato_votado, LocalTime horario_emision) {
         this.votante = votante;
         this.candidato_votado = candidato_votado;
-        this.horario_emision = null;
+        this.horario_emision = horario_emision;
     }
 
     //Getters

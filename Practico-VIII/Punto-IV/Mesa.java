@@ -17,7 +17,7 @@ public class Mesa extends ElementoVoto {
     public void addVoto(Voto voto) {
         if (!this.votos.contains(voto) && this.votantes.contains(voto.getVotante())) {
             this.votos.add(voto);
-            voto.setHorarioEmision(LocalTime.now());
+            //voto.setHorarioEmision(LocalTime.now());
         }
     }
 
@@ -41,8 +41,11 @@ public class Mesa extends ElementoVoto {
         for (Voto voto : this.votos) {
 
             if (candidato != null) {
-                if (voto.getCandidato().equals(candidato)) {
-                    cantidad_votos_candidato++;
+                if (voto.getCandidato() != null) {
+
+                    if (voto.getCandidato().equals(candidato)) {
+                        cantidad_votos_candidato++;
+                    }
                 }
             } else {
                 if (voto.getCandidato() == candidato) {

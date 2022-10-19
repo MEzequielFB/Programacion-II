@@ -1,4 +1,4 @@
-public class Candidato {
+public class Candidato implements Comparable<Candidato> {
     
     private String nombre;
     private String partido_politico;
@@ -38,5 +38,18 @@ public class Candidato {
     @Override
     public String toString() {
         return this.getNombre();
+    }
+
+    @Override
+    public int compareTo(Candidato otroCandidato) {
+        
+        int resultado = this.getPartidoPolitico().compareTo(otroCandidato.getPartidoPolitico());
+        if (resultado == 0) {
+            resultado = this.getAgrupacion().compareTo(otroCandidato.getAgrupacion());
+        }
+        if (resultado == 0) {
+            resultado = this.getNombre().compareTo(otroCandidato.getNombre());
+        }
+        return resultado;
     }
 }
