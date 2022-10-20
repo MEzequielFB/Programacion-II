@@ -11,6 +11,7 @@ public class Main {
         ComportamientoImprimir comportamiento_imprimir = new ComportamientoImprimir();
         ComportamientoAddAsc comportamiento_add_asc = new ComportamientoAddAsc();
         ComportamientoAddDesc comportamiento_add_desc = new ComportamientoAddDesc();
+        ComportamientoCantidadNodos comportamiento_cantidad_nodos = new ComportamientoCantidadNodos();
 
         nodo_raiz.recorrer(comportamiento_imprimir);
         
@@ -19,5 +20,8 @@ public class Main {
 
         nodo_raiz.recorrer(comportamiento_add_desc);
         System.out.println(comportamiento_add_desc.getLista());
+
+        nodo_raiz.recorrer(comportamiento_cantidad_nodos);
+        System.out.println("Cantidad de nodos recorridos: " + comportamiento_cantidad_nodos.getCantidadNodos());
     }
 }
