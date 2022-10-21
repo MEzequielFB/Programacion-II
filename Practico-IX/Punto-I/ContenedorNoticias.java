@@ -13,14 +13,37 @@ public class ContenedorNoticias extends Contenido {
     }
 
     //Funcionalidades
+    @Override
+    public ArrayList<Noticia> buscarNoticias(Filtro filtro) {
+
+        ArrayList<Noticia> noticias_filtradas = new ArrayList<>();
+        for (Contenido contenido : this.contenidos) {
+            noticias_filtradas.addAll(contenido.buscarNoticias(filtro));
+        }
+        return noticias_filtradas;
+    }
+
     public void addContenido(Contenido contenido) {
 
         if (!this.contenidos.contains(contenido)) {
             this.contenidos.add(contenido);
+            contenido.setReferenciaPadre(this);
         }
     }
 
     //Getters
+    @Override
+    public String getMapa() {
+
+        String mapa = "";
+        mapa = this.descripcion;
+        
+        if (this.getReferenciaPadre() != null) {
+            mapa = this.getReferenciaPadre().getMapa() + "/" + mapa;
+        }
+        return mapa;
+    }
+
     @Override
     public Contenido getCopiaPorPalabraClave(String palabra_clave) {
 
