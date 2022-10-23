@@ -25,6 +25,16 @@ public class GastoDetallado extends Gasto {
     }
     //Getters
     @Override
+    public double getPorcentajePorDiaPendiente() {
+        
+        double porcentaje_total = 0;
+        for (Gasto gasto : this.detalles) {
+            porcentaje_total += gasto.getPorcentajePorDiaPendiente();
+        }
+        return porcentaje_total;
+    }
+
+    @Override
     public ArrayList<Gasto> getListaGastosPorFiltro(Filtro filtro) {
         
         ArrayList<Gasto> gastos_filtrados = new ArrayList<>();
@@ -42,6 +52,10 @@ public class GastoDetallado extends Gasto {
         int monto_total = 0;
         for (Gasto gasto : this.detalles) {
             monto_total += gasto.getMonto();
+        }
+        int dias_pendientes = this.getDiasPendiente();
+        if (dias_pendientes > 0) {
+            return (int) (monto_total + ( (monto_total * (this.getDiasPendiente() / 100) ) * (dias_pendientes + 1) ));
         }
         return monto_total;
     }

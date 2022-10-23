@@ -3,11 +3,13 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-        GastoSimple gasto_simple1 = new GastoSimple("cimientos", LocalDate.of(2022, 10, 11), "alta", 900, "construccion");
-        GastoSimple gasto_simple2 = new GastoSimple("pintura", LocalDate.of(2022, 10, 21), "media",600, "construccion");
-        GastoSimple gasto_simple3 = new GastoSimple("vehiculo", LocalDate.of(2022, 10, 25), "alta",1800, "transporte");
+        GastoSimple gasto_simple1 = new GastoSimple("cimientos", LocalDate.of(2022, 10, 11), "alta", 900, "construccion", 5);
+        GastoSimple gasto_simple2 = new GastoSimple("pintura", LocalDate.of(2022, 10, 21), "media",600, "construccion", 3);
+        GastoSimple gasto_simple3 = new GastoSimple("vehiculo", LocalDate.of(2022, 10, 25), "alta",1800, "transporte", 10);
 
         GastoDetallado gasto_detallado1 = new GastoDetallado("construccion de edificio", LocalDate.of(2022, 11, 11), "media");
+
+        gasto_simple2.setDiasPendiente(1); //Setea dias pendientes
 
         gasto_detallado1.addDetalle(gasto_simple1);
         gasto_detallado1.addDetalle(gasto_simple2);
