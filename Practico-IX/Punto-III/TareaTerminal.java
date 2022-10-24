@@ -4,11 +4,9 @@ import java.util.ArrayList;
 public abstract class TareaTerminal {
     
     private String titulo;
-    private ArrayList<Recurso> recursos;
 
     public TareaTerminal(String titulo) {
         this.titulo = titulo;
-        this.recursos = new ArrayList<>();
     }
 
     //Metodos abstractos
@@ -17,14 +15,11 @@ public abstract class TareaTerminal {
     public abstract LocalDate getFechaInicioReal();
     public abstract LocalDate getFechaFinalizacionReal();
     public abstract String getEstado();
+    public abstract ArrayList<TareaTerminal> getTareasAtrasadas();
+    public abstract ArrayList<Recurso> getRecursos();
+    public abstract int getDuracionEstimada();
 
     //Funcionalidades
-    //Si el recurso agrego la tarea a su lista, el recurso se agrega a la lista de recursos de la tarea
-    public void addRecurso(Recurso recurso) {
-        if (!this.recursos.contains(recurso) && recurso.addTareaAsignada(this)) {
-            this.recursos.add(recurso);
-        }
-    }
 
     //Getters
     public String getTitulo() {
@@ -45,6 +40,6 @@ public abstract class TareaTerminal {
 
     @Override
     public String toString() {
-        return this.getClass().getName() + "[" + this.titulo + ", " + this.recursos;
+        return this.getClass().getName() + "[" + this.titulo;
     }
 }

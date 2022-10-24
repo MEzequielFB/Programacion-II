@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 public class TareaCompuesta extends TareaTerminal {
@@ -18,6 +19,40 @@ public class TareaCompuesta extends TareaTerminal {
     }
 
     //Getters
+    @Override
+    public int getDuracionEstimada() {
+        return Math.abs(Period.between(this.getFechaInicioEstimada(), this.getFechaFinalizacionEstimada()).getDays());
+    }
+
+    @Override
+    public ArrayList<Recurso> getRecursos() {
+
+        ArrayList<Recurso> recursos = new ArrayList<>();
+        for (TareaTerminal tarea : this.tareas) {
+            /* recursos.addAll(tarea.getRecursos()); */
+
+            for (Recurso recurso : tarea.getRecursos()) {
+                if (!recursos.contains(recurso)) {
+                    recursos.add(recurso);
+                }
+            }
+        }
+        return recursos;
+    }
+
+    @Override
+    public ArrayList<TareaTerminal> getTareasAtrasadas() { //Se puede agregar a si mismo
+
+        ArrayList<TareaTerminal> tareas_atrasadas = new ArrayList<>();
+        for (TareaTerminal tarea : this.tareas) {
+            tareas_atrasadas.addAll(tarea.getTareasAtrasadas());
+        }
+        if (this.getEstado().equalsIgnoreCase("en espera") && this.getFechaFinalizacionEstimada().isBefore(LocalDate.now())) {
+            tareas_atrasadas.add(this);
+        }
+        return tareas_atrasadas;
+    }
+
     @Override
     public String getEstado() {
 

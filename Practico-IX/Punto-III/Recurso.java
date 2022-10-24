@@ -4,7 +4,7 @@ public class Recurso {
     
     private String titulo;
     private boolean es_compartido;
-    private ArrayList<TareaTerminal> tareas_asignadas;
+    private ArrayList<TareaSimple> tareas_asignadas;
     
     public Recurso(String titulo, boolean es_compartido) {
         this.titulo = titulo;
@@ -14,7 +14,8 @@ public class Recurso {
 
     //Funcionalidades
     //Agrega siempre si es compartido. Si no es compartido, solo agrega cuando la lista esta vacia
-    public boolean addTareaAsignada(TareaTerminal tarea) {
+    //Devuelve un boolean para que la TareaSimple controle si agregar el recurso a su lista
+    public boolean addTareaAsignada(TareaSimple tarea) {
 
         if (!this.tareas_asignadas.contains(tarea) && (this.es_compartido || (!this.es_compartido && this.tareas_asignadas.isEmpty()))) {
             this.tareas_asignadas.add(tarea);
@@ -24,6 +25,10 @@ public class Recurso {
     }
 
     //Getters
+    public ArrayList<TareaTerminal> getTareasAsignadas() {
+        return new ArrayList<>(this.tareas_asignadas);
+    }
+
     public String getTitulo() {
         return this.titulo;
     }

@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Sistema {
@@ -9,7 +10,31 @@ public class Sistema {
     }
 
     //Funcionalidades
-    
+    public int getDuracionEstimadaPorTarea(TareaTerminal tarea) {
+        return tarea.getDuracionEstimada();
+    }
+
+    public ArrayList<Recurso> getRecursosPorTarea(TareaTerminal tarea) {
+        return tarea.getRecursos();
+    }
+
+    public ArrayList<TareaTerminal> getTareasPorRecurso(Recurso recurso) {
+        return recurso.getTareasAsignadas();
+    }
+
+    public ArrayList<TareaTerminal> getTareasAtrasadas() {
+        
+        ArrayList<TareaTerminal> tareas_atrasadas = new ArrayList<>();
+        for (TareaTerminal tarea : this.tareas) {
+
+            tareas_atrasadas.addAll(tarea.getTareasAtrasadas());
+
+            /* if (tarea.getEstado().equalsIgnoreCase("en espera") && tarea.getFechaFinalizacionEstimada().isBefore(LocalDate.now())) {
+                tareas_atrasadas.add(tarea);
+            } */
+        }
+        return tareas_atrasadas;
+    }
 
     public void addTarea(TareaTerminal tarea) {
         if (!this.tareas.contains(tarea)) {
