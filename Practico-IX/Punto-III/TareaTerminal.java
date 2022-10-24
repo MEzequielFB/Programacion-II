@@ -40,6 +40,6 @@ public abstract class TareaTerminal {
 
     @Override
     public String toString() {
-        return this.getClass().getName() + "[" + this.titulo;
+        return this.getClass().getName() + "[titulo=" + titulo + "]";
     }
 }

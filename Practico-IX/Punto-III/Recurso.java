@@ -1,23 +1,23 @@
 import java.util.ArrayList;
 
-public class Recurso {
+public abstract class Recurso {
     
     private String titulo;
-    private boolean es_compartido;
-    private ArrayList<TareaSimple> tareas_asignadas;
+    protected ArrayList<TareaSimple> tareas_asignadas;
     
-    public Recurso(String titulo, boolean es_compartido) {
+    public Recurso(String titulo) {
         this.titulo = titulo;
-        this.es_compartido = es_compartido;
         this.tareas_asignadas = new ArrayList<>();
     }
 
     //Funcionalidades
+    public abstract boolean sePuedeAsignarTarea(TareaSimple tarea);
+
     //Agrega siempre si es compartido. Si no es compartido, solo agrega cuando la lista esta vacia
     //Devuelve un boolean para que la TareaSimple controle si agregar el recurso a su lista
-    public boolean addTareaAsignada(TareaSimple tarea) {
+    public boolean addTareaAsignada(TareaSimple tarea) { //Metodo template
 
-        if (!this.tareas_asignadas.contains(tarea) && (this.es_compartido || (!this.es_compartido && this.tareas_asignadas.isEmpty()))) {
+        if (this.sePuedeAsignarTarea(tarea)) {
             this.tareas_asignadas.add(tarea);
             return true;
         }
@@ -33,9 +33,9 @@ public class Recurso {
         return this.titulo;
     }
 
-    public boolean esCompartido() {
+    /* public boolean esCompartido() {
         return this.es_compartido;
-    }
+    } */
 
     @Override
     public boolean equals(Object o) {
@@ -47,5 +47,10 @@ public class Recurso {
         catch(Exception exc) {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Recurso [titulo=" + titulo + "]";
     }
 }

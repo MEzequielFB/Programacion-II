@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Sistema {
@@ -10,6 +9,10 @@ public class Sistema {
     }
 
     //Funcionalidades
+    public boolean sePuedeAgregarRecurso(Recurso recurso, TareaSimple tarea) {
+        return tarea.sePuedeAgregarRecurso(recurso);
+    }
+
     public int getDuracionEstimadaPorTarea(TareaTerminal tarea) {
         return tarea.getDuracionEstimada();
     }

@@ -102,7 +102,7 @@ public class TareaCompuesta extends TareaTerminal {
             LocalDate fecha_tarea = tarea.getFechaFinalizacionEstimada();
             if (fecha_finalizacion_estimada != null) {
                 
-                if (fecha_tarea.isBefore(fecha_finalizacion_estimada)) {
+                if (fecha_tarea.isAfter(fecha_finalizacion_estimada)) {
                     fecha_finalizacion_estimada = fecha_tarea;
                 }
             } else {
@@ -125,6 +125,9 @@ public class TareaCompuesta extends TareaTerminal {
                     fecha_inicio_real = fecha_tarea;
                 }
             }
+            else if (fecha_inicio_real == null) {
+                fecha_inicio_real = fecha_tarea;
+            }
         }
         return fecha_inicio_real;
     }
@@ -138,16 +141,19 @@ public class TareaCompuesta extends TareaTerminal {
             LocalDate fecha_tarea = tarea.getFechaFinalizacionReal();
             if (fecha_finalizacion_real != null && fecha_tarea != null) {
 
-                if (fecha_tarea.isBefore(fecha_finalizacion_real)) {
+                if (fecha_tarea.isAfter(fecha_finalizacion_real)) {
                     fecha_finalizacion_real = fecha_tarea;
                 }
+            }
+            else if (fecha_finalizacion_real == null) {
+                fecha_finalizacion_real = fecha_tarea;
             }
         }
         return fecha_finalizacion_real;
     }
 
-    @Override
+    /* @Override
     public String toString() {
         return super.toString() + ", " + this.tareas + "]";
-    }
+    } */
 }

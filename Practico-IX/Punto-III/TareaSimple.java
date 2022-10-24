@@ -22,6 +22,10 @@ public class TareaSimple extends TareaTerminal {
     }
 
     //Funcionalidades
+    public boolean sePuedeAgregarRecurso(Recurso recurso) {
+        return !this.recursos.contains(recurso) && recurso.sePuedeAsignarTarea(this);
+    }
+
     //Si el recurso agrego la tarea a su lista, el recurso se agrega a la lista de recursos de la tarea
     public void addRecurso(Recurso recurso) {
         if (!this.recursos.contains(recurso) && recurso.addTareaAsignada(this)) {
