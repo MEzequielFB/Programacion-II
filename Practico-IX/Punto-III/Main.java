@@ -14,11 +14,14 @@ public class Main {
         RecursoExclusivo recurso_exclusivo1 = new RecursoExclusivo("jorge", LocalDate.of(2022, 11, 4));
         RecursoExclusivo recurso_exclusivo2 = new RecursoExclusivo("destornillador", LocalDate.of(2022, 10, 13));
         RecursoCompartido recurso_compartido1 = new RecursoCompartido("marcelo");
+        RecursoCompartido recurso_compartido2 = new RecursoCompartido("luis");
 
         tarea_simple2.addRecurso(recurso_exclusivo1);
 
         tarea_simple1.addRecurso(recurso_compartido1);
         tarea_simple3.addRecurso(recurso_compartido1);
+
+        tarea_compuesta1.addRecurso(recurso_compartido2);
 
         tarea_compuesta1.addTarea(tarea_simple1);
         tarea_compuesta1.addTarea(tarea_simple2);
@@ -43,6 +46,7 @@ public class Main {
         //Inciso 2
         System.out.println("\nTareas que usan el recurso_exclusivo1: " + sistema1.getTareasPorRecurso(recurso_exclusivo1));
         System.out.println("Tareas que usan el recurso_compartido1: " + sistema1.getTareasPorRecurso(recurso_compartido1));
+        System.out.println("Tareas que usan el recurso_compartido2: " + sistema1.getTareasPorRecurso(recurso_compartido2));
 
         //Inciso 3
         System.out.println("\nRecursos usados en tarea_compuesta1: " + sistema1.getRecursosPorTarea(tarea_compuesta1));

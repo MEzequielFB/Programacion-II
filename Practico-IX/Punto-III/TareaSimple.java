@@ -9,7 +9,6 @@ public class TareaSimple extends TareaTerminal {
     private LocalDate fecha_finalizacion_estimada;
     private LocalDate fecha_inicio_real;
     private LocalDate fecha_finalizacion_real;
-    private ArrayList<Recurso> recursos;
 
     public TareaSimple(String titulo, LocalDate fecha_inicio_estimada, LocalDate fecha_finalizacion_estimada) {
         super(titulo);
@@ -18,20 +17,9 @@ public class TareaSimple extends TareaTerminal {
         this.fecha_finalizacion_estimada = fecha_finalizacion_estimada;
         this.fecha_inicio_real = null;
         this.fecha_finalizacion_real = null;
-        this.recursos = new ArrayList<>();
     }
 
     //Funcionalidades
-    public boolean sePuedeAgregarRecurso(Recurso recurso) {
-        return !this.recursos.contains(recurso) && recurso.sePuedeAsignarTarea(this);
-    }
-
-    //Si el recurso agrego la tarea a su lista, el recurso se agrega a la lista de recursos de la tarea
-    public void addRecurso(Recurso recurso) {
-        if (!this.recursos.contains(recurso) && recurso.addTareaAsignada(this)) {
-            this.recursos.add(recurso);
-        }
-    }
 
     //Getters
     @Override

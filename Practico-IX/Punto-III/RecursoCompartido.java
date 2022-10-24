@@ -5,7 +5,7 @@ public class RecursoCompartido extends Recurso {
     }
 
     @Override
-    public boolean sePuedeAsignarTarea(TareaSimple tarea) {
+    public boolean sePuedeAsignarTarea(TareaTerminal tarea) {
         return !this.tareas_asignadas.contains(tarea);
     }
 }

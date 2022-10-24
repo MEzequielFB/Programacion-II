@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public abstract class Recurso {
     
     private String titulo;
-    protected ArrayList<TareaSimple> tareas_asignadas;
+    protected ArrayList<TareaTerminal> tareas_asignadas;
     
     public Recurso(String titulo) {
         this.titulo = titulo;
@@ -11,11 +11,11 @@ public abstract class Recurso {
     }
 
     //Funcionalidades
-    public abstract boolean sePuedeAsignarTarea(TareaSimple tarea);
+    public abstract boolean sePuedeAsignarTarea(TareaTerminal tarea);
 
     //Agrega siempre si es compartido. Si no es compartido, solo agrega cuando la lista esta vacia
-    //Devuelve un boolean para que la TareaSimple controle si agregar el recurso a su lista
-    public boolean addTareaAsignada(TareaSimple tarea) { //Metodo template
+    //Devuelve un boolean para que la TareaTerminal controle si agregar el recurso a su lista
+    public boolean addTareaAsignada(TareaTerminal tarea) { //Metodo template
 
         if (this.sePuedeAsignarTarea(tarea)) {
             this.tareas_asignadas.add(tarea);

@@ -37,6 +37,11 @@ public class TareaCompuesta extends TareaTerminal {
                 }
             }
         }
+        for (Recurso recurso : this.recursos) {
+            if (!recursos.contains(recurso)) {
+                recursos.add(recurso);
+            }
+        }
         return recursos;
     }
 

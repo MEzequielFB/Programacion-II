@@ -12,7 +12,7 @@ public class RecursoExclusivo extends Recurso {
     //Funcionalidades
     //Si la fecha limit de uso del recurso esta despues de la fecha de inicio y finalizacion estimadas, se agrega. SI tambien cumple que tenga la lista vacia
     @Override
-    public boolean sePuedeAsignarTarea(TareaSimple tarea) {
+    public boolean sePuedeAsignarTarea(TareaTerminal tarea) {
         return this.tareas_asignadas.isEmpty() && (this.fecha_limite_uso.isAfter(tarea.getFechaInicioEstimada()) && this.fecha_limite_uso.isAfter(tarea.getFechaFinalizacionEstimada()));
     }
 
