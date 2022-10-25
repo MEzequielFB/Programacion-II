@@ -5,14 +5,24 @@ public class SeguroIntegrador extends Seguro {
     private ArrayList<Seguro> seguros;
 
     public SeguroIntegrador(String nombre, String dni_duenio, String descripcion) {
-        super(dni_duenio, descripcion, nombre);
+        super(nombre, dni_duenio, descripcion);
         this.seguros = new ArrayList<>();
     }
 
     //Funcionalidades
+    @Override
+    public ArrayList<Seguro> buscarSeguros(Filtro filtro) {
+        ArrayList<Seguro> seguros_filtrados = new ArrayList<>();
+        for (Seguro seguro : this.seguros) {
+            seguros_filtrados.addAll(seguro.buscarSeguros(filtro));
+        }
+        return seguros_filtrados;
+    }
+
     public void addSeguro(Seguro seguro) {
         if (!this.seguros.contains(seguro)) {
             this.seguros.add(seguro);
+            seguro.setDniDuenio(this.getDniDuenio());
         }
     }
 

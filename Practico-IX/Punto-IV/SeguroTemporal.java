@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class SeguroTemporal extends Seguro {
 
@@ -6,14 +7,23 @@ public class SeguroTemporal extends Seguro {
     private LocalDate fecha_inicio;
     private LocalDate fecha_fin;
 
-    public SeguroTemporal(String nombre, String dni_duenio, String descripcion, Seguro seguro, LocalDate fecha_inicio, LocalDate fecha_fin) {
-        super(nombre, dni_duenio, descripcion);
+    public SeguroTemporal(String nombre, String descripcion, Seguro seguro, LocalDate fecha_inicio, LocalDate fecha_fin) {
+        super(nombre, seguro.getDniDuenio(), descripcion);
         this.seguro = seguro;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
     }
 
     //Funcionalidades
+    @Override
+    public ArrayList<Seguro> buscarSeguros(Filtro filtro) {
+        ArrayList<Seguro> seguros_filtrados = new ArrayList<>();
+        if (esFechaValida()) {
+            seguros_filtrados.addAll(this.seguro.buscarSeguros(filtro));
+        }
+        return seguros_filtrados;
+    }
+
     public boolean esFechaValida(){
         LocalDate fecha_actual = LocalDate.now();
         return fecha_actual.isAfter(this.fecha_inicio) && fecha_actual.isBefore(this.fecha_fin);

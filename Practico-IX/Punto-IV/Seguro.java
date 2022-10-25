@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public abstract class Seguro {
 
     private String nombre;
@@ -14,6 +16,7 @@ public abstract class Seguro {
     public abstract int getMontoAsegurado();
     public abstract int getNumero();
     public abstract int getCostoPoliza();
+    public abstract ArrayList<Seguro> buscarSeguros(Filtro filtro);
 
     //Getters
     public String getNombre() {
@@ -28,15 +31,25 @@ public abstract class Seguro {
         return this.descripcion;
     }
 
+    //Setters
+    public void setDniDuenio(String dni_duenio) {
+        this.dni_duenio = dni_duenio;
+    }
+
     @Override
     public boolean equals(Object o) {
 
         try {
             Seguro otroSeguro = (Seguro) o;
-            return this.getDniDuenio().equalsIgnoreCase(otroSeguro.dni_duenio) && this.getDescripcion().equalsIgnoreCase(otroSeguro.getDescripcion());
+            return this.getDniDuenio().equalsIgnoreCase(otroSeguro.dni_duenio) && this.getNombre().equalsIgnoreCase(otroSeguro.getNombre());
         }
         catch(Exception exc) {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Seguro [nombre=" + nombre + "]";
     }
 }
