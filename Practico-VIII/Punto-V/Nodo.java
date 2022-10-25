@@ -1,24 +1,52 @@
-public class Nodo implements Comparable<Nodo> {
+public class Nodo {
     
-    private int valor;
+    private Comparable valor;
     private Nodo nodo_padre;
     private Nodo nodo_izquierda;
     private Nodo nodo_derecha;
 
-    public Nodo(int valor, Nodo nodo_izquierda, Nodo nodo_derecha) {
+    public Nodo() {
+
+    }
+
+    public Nodo(Comparable valor) {
         this.valor = valor;
-        setNodoIzquierda(nodo_izquierda);
-        setNodoDerecha(nodo_derecha);
     }
 
     //Funcionalidades
-    public void recorrer(AccionEjecutable comportamiento) {
-        if (nodo_izquierda != null) {
-            nodo_izquierda.recorrer(comportamiento);
+    public void addNodo(Comparable valor) {
+
+        if (this.valor == null) {
+            this.valor = valor;
+        } else {
+            int resultado = this.valor.compareTo(valor);
+            if (resultado > 0) {
+                if (this.nodo_izquierda != null) {
+                    this.nodo_izquierda.addNodo(valor);
+                } else {
+                    this.nodo_izquierda = new Nodo(valor);
+                    this.nodo_izquierda.setPadre(this);
+                }
+            }
+    
+            if (resultado < 0) {
+                if (this.nodo_derecha != null) {
+                    this.nodo_derecha.addNodo(valor);
+                } else {
+                    this.nodo_derecha = new Nodo(valor);
+                    this.nodo_derecha.setPadre(this);
+                }
+            }
         }
-        comportamiento.ejecutarNodo(this);
+    }
+
+    public void recorrer(AccionEjecutable accion_ejecutable) {
+        if (nodo_izquierda != null) {
+            nodo_izquierda.recorrer(accion_ejecutable);
+        }
+        accion_ejecutable.ejecutarNodo(this);
         if (nodo_derecha != null) {
-            nodo_derecha.recorrer(comportamiento);
+            nodo_derecha.recorrer(accion_ejecutable);
         }
     }
 
@@ -29,13 +57,8 @@ public class Nodo implements Comparable<Nodo> {
         return false;
     }
 
-    @Override
-    public int compareTo(Nodo otroNodo) {
-        return this.getValor() - otroNodo.getValor();
-    }
-
     //Getters
-    public int getValor() {
+    public Comparable getValor() {
         return this.valor;
     }
 
@@ -54,32 +77,6 @@ public class Nodo implements Comparable<Nodo> {
     //Setters
     public void setPadre(Nodo nodo_padre) {
         this.nodo_padre = nodo_padre;
-    }
-
-    public void setNodoIzquierda(Nodo nodo_izquierda) {
-
-        if (nodo_izquierda != null) {
-
-            if (this.compareTo(nodo_izquierda) > 0) {
-                this.nodo_izquierda = nodo_izquierda;
-                nodo_izquierda.setPadre(this);
-            }
-        } else {
-            this.nodo_izquierda = nodo_izquierda;
-        }
-    }
-
-    public void setNodoDerecha(Nodo nodo_derecha) {
-
-        if (nodo_derecha != null) {
-
-            if (this.compareTo(nodo_derecha) < 0) {
-                this.nodo_derecha = nodo_derecha;
-                nodo_derecha.setPadre(this);
-            }
-        } else {
-            this.nodo_derecha = nodo_derecha;
-        }
     }
 
     @Override
