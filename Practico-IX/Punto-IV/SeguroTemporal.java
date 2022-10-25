@@ -13,7 +13,21 @@ public class SeguroTemporal extends Seguro {
         this.fecha_fin = fecha_fin;
     }
 
+    //Funcionalidades
+    public boolean esFechaValida(){
+        LocalDate fecha_actual = LocalDate.now();
+        return fecha_actual.isAfter(this.fecha_inicio) && fecha_actual.isBefore(this.fecha_fin);
+    }
+
     //Getters
+    @Override
+    public int getCostoPoliza() {
+        if (this.esFechaValida()) {
+            return this.seguro.getCostoPoliza();
+        }
+        return 0;
+    }
+
     public Seguro getSeguro() {
         return this.seguro;
     }
@@ -27,17 +41,15 @@ public class SeguroTemporal extends Seguro {
     }
 
     @Override
-    public int getMonto() {
-
-        LocalDate fecha_actual = LocalDate.now();
-        if (fecha_actual.isAfter(this.fecha_inicio) && fecha_actual.isBefore(this.fecha_fin)) {
-            return this.seguro.getMonto();
+    public int getMontoAsegurado() {
+        if (this.esFechaValida()) {
+            return this.seguro.getMontoAsegurado();
         }
         return -1;
     }
 
     @Override
     public int getNumero() {
-        return this.seguro.getMonto();
+        return this.seguro.getNumero();
     }
 }

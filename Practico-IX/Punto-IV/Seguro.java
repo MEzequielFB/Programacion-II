@@ -11,8 +11,9 @@ public abstract class Seguro {
     }
 
     //Metodos abstractos
-    public abstract int getMonto();
+    public abstract int getMontoAsegurado();
     public abstract int getNumero();
+    public abstract int getCostoPoliza();
 
     //Getters
     public String getNombre() {

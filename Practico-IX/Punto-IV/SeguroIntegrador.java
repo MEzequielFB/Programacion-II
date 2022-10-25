@@ -18,6 +18,16 @@ public class SeguroIntegrador extends Seguro {
 
     //Getters
     @Override
+    public int getCostoPoliza() {
+        
+        int costo_total = 0;
+        for (Seguro seguro : this.seguros) {
+            costo_total += seguro.getCostoPoliza();
+        }
+        return costo_total;
+    }
+
+    @Override
     public int getNumero() {
 
         int numero_resultante = 0;
@@ -32,11 +42,11 @@ public class SeguroIntegrador extends Seguro {
     }
 
     @Override
-    public int getMonto() {
+    public int getMontoAsegurado() {
         
         int monto_total = 0;
         for (Seguro seguro : this.seguros) {
-            monto_total += seguro.getMonto();
+            monto_total += seguro.getMontoAsegurado();
         }
         return monto_total;
     }
