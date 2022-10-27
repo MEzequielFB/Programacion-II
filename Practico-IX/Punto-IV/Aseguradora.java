@@ -11,6 +11,10 @@ public class Aseguradora {
     }
 
     //Funcionalidades
+    public int getCostoPorSeguro(Seguro seguro) {
+        return seguro.getCostoPoliza();
+    }
+
     public ArrayList<Seguro> buscarSeguros(Filtro filtro, Comparator<Seguro> comparador) {
 
         ArrayList<Seguro> seguros_filtrados = new ArrayList<>();

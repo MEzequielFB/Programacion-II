@@ -5,12 +5,12 @@ public class Main {
         
         CalcularCostoPorcentaje calculador_porcentaje1 = new CalcularCostoPorcentaje(20);
         CalcularCostoMontoFijo  calculador_monto_fijo1 = new CalcularCostoMontoFijo(1500);
-        CalcularCostoMontoFijoPorcentaje calculador_monto_fijo_porcentaje1 = new CalcularCostoMontoFijoPorcentaje(1600, 40);
+        CalcularCostoAnd calculador_and1 = new CalcularCostoAnd(calculador_porcentaje1, calculador_monto_fijo1);
 
         SeguroSimple seguro_simple1 = new SeguroSimple("seguro de vida", "41653765", "salud", 1, 6000, calculador_porcentaje1);
         SeguroSimple seguro_simple2 = new SeguroSimple("seguro automotor", "372849281", "automotor", 10, 3000, calculador_monto_fijo1);
-        SeguroSimple seguro_simple3 = new SeguroSimple("seguro hogar", "47876543", "incendio y hogar bienestar", 3, 300000, calculador_monto_fijo_porcentaje1);
-        SeguroSimple seguro_simple4 = new SeguroSimple("seguro de vida", "7538291", "saludx2", 5, 16000, calculador_monto_fijo_porcentaje1);
+        SeguroSimple seguro_simple3 = new SeguroSimple("seguro hogar", "47876543", "incendio y hogar bienestar", 3, 300000, calculador_and1);
+        SeguroSimple seguro_simple4 = new SeguroSimple("seguro de vida", "7538291", "saludx2", 5, 16000, calculador_and1);
 
 
         SeguroTemporal seguro_temporal1 = new SeguroTemporal("seguro temporal", "es temporal", seguro_simple1, LocalDate.of(2022, 10, 15), LocalDate.of(2023, 6, 15));
@@ -41,5 +41,10 @@ public class Main {
         //Inciso c
         FiltroPorDni filtro_dni1 = new FiltroPorDni("24134323");
         System.out.println("Seguros con dni '24134323' ordenados por numero de poliza: " + aseguradora1.buscarSeguros(filtro_dni1, comparador_numero1));
+
+        //Calcular costos
+        System.out.println("\nCosto de seguro_simple1: " + aseguradora1.getCostoPorSeguro(seguro_simple1));
+        System.out.println("Costo de seguro_simple2: " + aseguradora1.getCostoPorSeguro(seguro_simple2));
+        System.out.println("Costo de seguro_simple3: " + aseguradora1.getCostoPorSeguro(seguro_simple3));
     }
 }
