@@ -6,11 +6,12 @@ public class Main {
         ListaVinculada lista_vinculada = new ListaVinculada(nodo_raiz, add_ascendente);
 
         lista_vinculada.addNodo(11);
-        lista_vinculada.addNodo(14);
-        lista_vinculada.addNodo(16);
+        lista_vinculada.addNodo(11);
+        lista_vinculada.addNodo(12);
         lista_vinculada.imprimir();
 
-        lista_vinculada.removeNodoPorPosicion(1);
+        lista_vinculada.removeNodoPorPosicion(0);
+        lista_vinculada.removeNodoPorObjetoComparable(11);
         System.out.println();
         lista_vinculada.imprimir();
     }

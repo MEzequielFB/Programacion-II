@@ -9,6 +9,20 @@ public class ListaVinculada {
     }
 
     //Funcionalidades
+    public void removeNodoPorObjetoComparable(Comparable objeto_comparable) {
+        Nodo siguiente_nodo_raiz = this.nodo_raiz.getSiguienteNodo();
+        if (this.nodo_raiz.getObjetoComparable().compareTo(objeto_comparable) == 0) {
+            if (siguiente_nodo_raiz != null) {
+                this.setNodoRaiz(siguiente_nodo_raiz);
+                this.removeNodoPorObjetoComparable(objeto_comparable); //Se llama a si misma porque cambia el nodo raiz. Se verifica que la nueva raiz no conincida con el nodo a borrar
+            } else {
+                this.setNodoRaiz(null);
+            }
+        } else if (siguiente_nodo_raiz != null) {
+            siguiente_nodo_raiz.removeNodoPorObjetoComparable(objeto_comparable);
+        }
+    }
+
     public void removeNodoPorPosicion(int posicion) {
         int posicion_nodo = 0;
         Nodo siguiente_nodo_raiz = this.nodo_raiz.getSiguienteNodo();
