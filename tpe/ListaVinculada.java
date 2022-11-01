@@ -1,4 +1,6 @@
-public class ListaVinculada {
+import java.util.Iterator;
+
+public class ListaVinculada implements Iterable<Nodo> {
     
     private Nodo nodo_raiz;
     private ComportamientoAdd comportamiento_add;
@@ -9,18 +11,9 @@ public class ListaVinculada {
     }
 
     //Funcionalidades
-    public int getPosicionNodo(Nodo nodo_buscado) {
-
-        int posicion_nodo = 0;
-        if (this.nodo_raiz.equals(nodo_buscado)) {
-            return posicion_nodo;
-        }
-        posicion_nodo++;
-        Nodo siguiente_nodo = this.nodo_raiz.getSiguienteNodo();
-        if (siguiente_nodo != null) {
-            return siguiente_nodo.getPosicionNodo(nodo_buscado, posicion_nodo);
-        }
-        return -1;
+    @Override
+    public Iterator<Nodo> iterator() {
+        return new IteradorNodos();
     }
 
     public void removeNodoPorNodo(Nodo nodo_param) {
@@ -75,6 +68,45 @@ public class ListaVinculada {
     }
 
     //Getters
+    public Nodo getNodoPorPosicion(int posicion_param) {
+        int posicion = 0;
+        if (this.getPosicionNodo(this.nodo_raiz) == posicion_param) {
+            return this.nodo_raiz;
+        }
+        posicion++;
+        Nodo siguiente_nodo = this.nodo_raiz.getSiguienteNodo();
+        if (siguiente_nodo != null) {
+            return siguiente_nodo.getNodoPorPosicion(posicion_param, posicion);
+        }
+        return null;
+    }
+
+    public int getCantidadNodos() {
+        int contador = 0;
+        if (this.nodo_raiz != null) {
+            contador++;
+            Nodo siguiente_nodo = this.nodo_raiz.getSiguienteNodo();
+            if (siguiente_nodo != null) {
+                contador += siguiente_nodo.getCantidadNodos();
+            }
+        }
+        return contador;
+    }
+
+    public int getPosicionNodo(Nodo nodo_buscado) {
+
+        int posicion_nodo = 0;
+        if (this.nodo_raiz.equals(nodo_buscado)) {
+            return posicion_nodo;
+        }
+        posicion_nodo++;
+        Nodo siguiente_nodo = this.nodo_raiz.getSiguienteNodo();
+        if (siguiente_nodo != null) {
+            return siguiente_nodo.getPosicionNodo(nodo_buscado, posicion_nodo);
+        }
+        return -1;
+    }
+
     public Nodo getNodoRaiz() {
         return this.nodo_raiz;
     }
@@ -90,5 +122,25 @@ public class ListaVinculada {
 
     public void setNodoRaiz(Nodo nodo_raiz) {
         this.nodo_raiz = nodo_raiz;
+    }
+
+    private class IteradorNodos implements Iterator<Nodo> {
+
+        private int posicion;
+
+        public IteradorNodos() {
+            this.posicion = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return this.posicion < getCantidadNodos();
+        }
+
+        @Override
+        public Nodo next() {
+            this.posicion++;
+            return getNodoPorPosicion(this.posicion-1);
+        }
     }
 }

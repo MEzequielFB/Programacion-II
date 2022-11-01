@@ -9,17 +9,6 @@ public class Nodo {
     }
     
     //Funcionalidades
-    public int getPosicionNodo(Nodo nodo_buscado, int posicion_nodo) {
-        if (this.equals(nodo_buscado)) {
-            return posicion_nodo;
-        }
-        posicion_nodo++;
-        if (this.siguiente_nodo != null) {
-            return this.siguiente_nodo.getPosicionNodo(nodo_buscado, posicion_nodo);
-        }
-        return -1;
-    }
-
     public void removeNodoPorNodo(Nodo nodo_param) {
         if (this.equals(nodo_param)) {
             if (this.siguiente_nodo != null) {
@@ -78,6 +67,36 @@ public class Nodo {
     }
 
     //Getters
+    public Nodo getNodoPorPosicion(int posicion_param, int posicion_nodo) {
+        if (posicion_nodo == posicion_param) {
+            return this;
+        }
+        posicion_nodo++;
+        if (this.siguiente_nodo != null) {
+            return this.siguiente_nodo.getNodoPorPosicion(posicion_param, posicion_nodo);
+        }
+        return null;
+    }
+
+    public int getCantidadNodos() {
+        int contador = 1;
+        if (this.siguiente_nodo != null) {
+            contador += this.siguiente_nodo.getCantidadNodos();
+        }
+        return contador;
+    }
+
+    public int getPosicionNodo(Nodo nodo_buscado, int posicion_nodo) {
+        if (this.equals(nodo_buscado)) {
+            return posicion_nodo;
+        }
+        posicion_nodo++;
+        if (this.siguiente_nodo != null) {
+            return this.siguiente_nodo.getPosicionNodo(nodo_buscado, posicion_nodo);
+        }
+        return -1;
+    }
+
     public Comparable getObjetoComparable() {
         return this.objeto_comparable;
     }

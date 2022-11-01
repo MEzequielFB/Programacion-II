@@ -18,10 +18,15 @@ public class Main {
         lista_vinculada.addNodo(12); */
         lista_vinculada.imprimir();
 
-        lista_vinculada.removeNodoPorPosicion(0);
-        lista_vinculada.removeNodoPorNodo(nodo1);
+        /* lista_vinculada.removeNodoPorPosicion(0);
+        lista_vinculada.removeNodoPorNodo(nodo1); */
         System.out.println();
         lista_vinculada.imprimir();
         System.out.println("Posicion de nodo3: " + lista_vinculada.getPosicionNodo(nodo3));
+        System.out.println("Cantidad de nodos: " + lista_vinculada.getCantidadNodos());
+        System.out.println("Nodo por posicion: " + lista_vinculada.getNodoPorPosicion(0));
+        for (Nodo nodo : lista_vinculada) {
+            System.out.println("Nodo: " + nodo);
+        }
     }
 }
