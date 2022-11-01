@@ -7,9 +7,23 @@ public class Nodo {
     public Nodo(Comparable objeto_comparable) {
         this.objeto_comparable = objeto_comparable;
     }
-
+    
     //Funcionalidades
-    public void removeNodoPorObjetoComparable(Comparable objeto_comparable) {
+    public void removeNodoPorNodo(Nodo nodo_param) {
+        if (this.equals(nodo_param)) {
+            if (this.siguiente_nodo != null) {
+                this.anterior_nodo.setSiguienteNodo(this.siguiente_nodo);
+                this.siguiente_nodo.setAnteriorNodo(this.anterior_nodo);
+                this.anterior_nodo.removeNodoPorNodo(nodo_param); //Llama al remove del anterior nodo para seguir eliminando ocurrencias
+            } else {
+                this.anterior_nodo.setSiguienteNodo(null);
+            }
+        } else if (this.siguiente_nodo != null) {
+            this.siguiente_nodo.removeNodoPorNodo(nodo_param);
+        }
+    }
+
+    /* public void removeNodoPorObjetoComparable(Comparable objeto_comparable) {
         if (this.objeto_comparable.compareTo(objeto_comparable) == 0) {
             if (this.siguiente_nodo != null) {
                 this.anterior_nodo.setSiguienteNodo(this.siguiente_nodo);
@@ -21,7 +35,7 @@ public class Nodo {
         } else if (this.siguiente_nodo != null) {
             this.siguiente_nodo.removeNodoPorObjetoComparable(objeto_comparable);
         }
-    }
+    } */
 
     public void removeNodoPorPosicion(int posicion_nodo, int posicion) {
         if (posicion_nodo == posicion) {
@@ -37,11 +51,11 @@ public class Nodo {
         }
     }
 
-    public void addNodo(Comparable objeto_comparable, ComportamientoAdd comportamiento_add) {
+    public void addNodo(Nodo nodo_nuevo, ComportamientoAdd comportamiento_add) {
         if (this.siguiente_nodo == null) {
-            comportamiento_add.add(this, objeto_comparable);
+            comportamiento_add.add(this, nodo_nuevo);
         } else {
-            this.siguiente_nodo.addNodo(objeto_comparable, comportamiento_add);
+            this.siguiente_nodo.addNodo(nodo_nuevo, comportamiento_add);
         }
     }
 
