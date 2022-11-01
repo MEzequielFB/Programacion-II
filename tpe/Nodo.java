@@ -9,6 +9,17 @@ public class Nodo {
     }
     
     //Funcionalidades
+    public int getPosicionNodo(Nodo nodo_buscado, int posicion_nodo) {
+        if (this.equals(nodo_buscado)) {
+            return posicion_nodo;
+        }
+        posicion_nodo++;
+        if (this.siguiente_nodo != null) {
+            return this.siguiente_nodo.getPosicionNodo(nodo_buscado, posicion_nodo);
+        }
+        return -1;
+    }
+
     public void removeNodoPorNodo(Nodo nodo_param) {
         if (this.equals(nodo_param)) {
             if (this.siguiente_nodo != null) {

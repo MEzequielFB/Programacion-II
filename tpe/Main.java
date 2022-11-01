@@ -22,5 +22,6 @@ public class Main {
         lista_vinculada.removeNodoPorNodo(nodo1);
         System.out.println();
         lista_vinculada.imprimir();
+        System.out.println("Posicion de nodo3: " + lista_vinculada.getPosicionNodo(nodo3));
     }
 }

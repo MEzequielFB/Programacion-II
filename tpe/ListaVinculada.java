@@ -9,6 +9,20 @@ public class ListaVinculada {
     }
 
     //Funcionalidades
+    public int getPosicionNodo(Nodo nodo_buscado) {
+
+        int posicion_nodo = 0;
+        if (this.nodo_raiz.equals(nodo_buscado)) {
+            return posicion_nodo;
+        }
+        posicion_nodo++;
+        Nodo siguiente_nodo = this.nodo_raiz.getSiguienteNodo();
+        if (siguiente_nodo != null) {
+            return siguiente_nodo.getPosicionNodo(nodo_buscado, posicion_nodo);
+        }
+        return -1;
+    }
+
     public void removeNodoPorNodo(Nodo nodo_param) {
         Nodo siguiente_nodo_raiz = this.nodo_raiz.getSiguienteNodo();
         if (this.nodo_raiz.equals(nodo_param)) {
