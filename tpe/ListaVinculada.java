@@ -118,12 +118,40 @@ public class ListaVinculada implements Iterable<Nodo> {
     //Setters
     public void setComportamientoAdd(ComportamientoAdd comportamiento_add) {
         this.comportamiento_add = comportamiento_add;
+        this.recorrerInverso();
+        /* int posicion_final = this.getCantidadNodos() - 1;
+        if (posicion_final != -1) {
+            Nodo ultimo_nodo = this.getNodoPorPosicion(posicion_final);
+            this.setNodoRaiz(ultimo_nodo);
+            this.addNodo(ultimo_nodo);
+        } */
+    }
+
+    public void recorrerInverso() {
+        int posicion_final = this.getCantidadNodos() - 1;
+        while (posicion_final >= 0) {
+            Nodo nodo_actual = this.getNodoPorPosicion(posicion_final);
+            nodo_actual.invertirSiguienteAnterior();
+            posicion_final--;
+        }
+        this.recorrer();
+    }
+
+    public void recorrer() {
+        int posicion_inicial = 0;
+        int cantidad_nodos = this.getCantidadNodos();
+        while (posicion_inicial < cantidad_nodos - 1) {
+            Nodo nodo_actual = this.getNodoPorPosicion(posicion_inicial);
+            nodo_actual.getSiguienteNodo().setAnteriorNodo(nodo_actual);
+            posicion_inicial++;
+        }
     }
 
     public void setNodoRaiz(Nodo nodo_raiz) {
         this.nodo_raiz = nodo_raiz;
     }
 
+    //Clase privada
     private class IteradorNodos implements Iterator<Nodo> {
 
         private int posicion;

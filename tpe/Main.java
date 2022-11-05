@@ -2,7 +2,10 @@ public class Main {
     public static void main(String[] args) {
         
         Nodo nodo_raiz = new Nodo(10);
+
         ComportamientoAddAscendente add_ascendente = new ComportamientoAddAscendente();
+        ComportamientoAddDescendente add_descendente = new ComportamientoAddDescendente();
+
         ListaVinculada lista_vinculada = new ListaVinculada(nodo_raiz, add_ascendente);
 
         Nodo nodo1 = new Nodo(11);
@@ -25,8 +28,12 @@ public class Main {
         System.out.println("Posicion de nodo3: " + lista_vinculada.getPosicionNodo(nodo3));
         System.out.println("Cantidad de nodos: " + lista_vinculada.getCantidadNodos());
         System.out.println("Nodo por posicion: " + lista_vinculada.getNodoPorPosicion(0));
+
         for (Nodo nodo : lista_vinculada) {
             System.out.println("Nodo: " + nodo);
         }
+
+        lista_vinculada.setComportamientoAdd(add_descendente);
+        lista_vinculada.imprimir();
     }
 }

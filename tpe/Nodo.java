@@ -9,6 +9,13 @@ public class Nodo {
     }
     
     //Funcionalidades
+    public void invertirSiguienteAnterior() {
+        if (this.anterior_nodo != null) {
+            this.setSiguienteNodo(this.anterior_nodo);
+            /* this.siguiente_nodo.setAnteriorNodo(this); */
+        }
+    }
+
     public void removeNodoPorNodo(Nodo nodo_param) {
         if (this.equals(nodo_param)) {
             if (this.siguiente_nodo != null) {
