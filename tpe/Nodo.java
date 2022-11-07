@@ -10,10 +10,12 @@ public class Nodo {
     
     //Funcionalidades
     public void invertirSiguienteAnterior() {
-        if (this.anterior_nodo != null) {
+        /* if (this.anterior_nodo != null) { */
+            Nodo aux = this.siguiente_nodo;
             this.setSiguienteNodo(this.anterior_nodo);
+            this.setAnteriorNodo(aux);
             /* this.siguiente_nodo.setAnteriorNodo(this); */
-        }
+        /* } */
     }
 
     public void removeNodoPorNodo(Nodo nodo_param) {

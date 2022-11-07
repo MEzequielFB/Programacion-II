@@ -21,6 +21,7 @@ public class ListaVinculada implements Iterable<Nodo> {
         if (this.nodo_raiz.equals(nodo_param)) {
             if (siguiente_nodo_raiz != null) {
                 this.setNodoRaiz(siguiente_nodo_raiz);
+                this.nodo_raiz.setAnteriorNodo(null);
                 this.removeNodoPorNodo(nodo_param); //Se llama a si misma porque cambia el nodo raiz. Se verifica que la nueva raiz no conincida con el nodo a borrar
             } else {
                 this.setNodoRaiz(null);
@@ -50,6 +51,7 @@ public class ListaVinculada implements Iterable<Nodo> {
         if (posicion_nodo == posicion) {
             if (siguiente_nodo_raiz != null) {
                 this.setNodoRaiz(siguiente_nodo_raiz);
+                this.nodo_raiz.setAnteriorNodo(null);
             } else {
                 this.setNodoRaiz(null);
             }
@@ -118,7 +120,7 @@ public class ListaVinculada implements Iterable<Nodo> {
     //Setters
     public void setComportamientoAdd(ComportamientoAdd comportamiento_add) {
         this.comportamiento_add = comportamiento_add;
-        this.recorrerInverso();
+        this.invertirLista();
         /* int posicion_final = this.getCantidadNodos() - 1;
         if (posicion_final != -1) {
             Nodo ultimo_nodo = this.getNodoPorPosicion(posicion_final);
@@ -127,25 +129,38 @@ public class ListaVinculada implements Iterable<Nodo> {
         } */
     }
 
-    public void recorrerInverso() {
-        int posicion_final = this.getCantidadNodos() - 1;
+    private void invertirLista() {
+        int cantidad_nodos = this.getCantidadNodos();
+        int posicion_final = cantidad_nodos - 1;
+        Nodo ultimo_nodo = null;
+        if (cantidad_nodos > 0) {
+            ultimo_nodo = this.getNodoPorPosicion(posicion_final);
+        }
         while (posicion_final >= 0) {
             Nodo nodo_actual = this.getNodoPorPosicion(posicion_final);
             nodo_actual.invertirSiguienteAnterior();
             posicion_final--;
         }
-        this.recorrer();
+        if (ultimo_nodo != null) {
+            this.setNodoRaiz(ultimo_nodo);
+        }
+        /* this.recorrer(cantidad_nodos); */
     }
 
-    public void recorrer() {
+    /* public void recorrer(int cantidad_nodos) {
         int posicion_inicial = 0;
-        int cantidad_nodos = this.getCantidadNodos();
+        if (posicion_inicial < cantidad_nodos - 1) {
+            this.getNodoPorPosicion(posicion_inicial).setAnteriorNodo(null);
+        }
         while (posicion_inicial < cantidad_nodos - 1) {
             Nodo nodo_actual = this.getNodoPorPosicion(posicion_inicial);
-            nodo_actual.getSiguienteNodo().setAnteriorNodo(nodo_actual);
+            Nodo siguiente_nodo = nodo_actual.getSiguienteNodo();
+            if (siguiente_nodo != null) {
+                siguiente_nodo.setAnteriorNodo(nodo_actual);
+            }
             posicion_inicial++;
         }
-    }
+    } */
 
     public void setNodoRaiz(Nodo nodo_raiz) {
         this.nodo_raiz = nodo_raiz;
