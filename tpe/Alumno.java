@@ -1,15 +1,16 @@
 import java.util.ArrayList;
 
-public class Alumno implements Comparable<Alumno> {
+public class Alumno extends ElementoEstudiantil implements Comparable<Alumno> {
     
-    private String nombre;
+    /* private String nombre; */
     private String apellido;
     private String dni;
     private int edad;
     private ArrayList<String> intereses;
 
     public Alumno(String nombre, String apellido, String dni, int edad) {
-        this.nombre = nombre;
+        super(nombre);
+        /* this.nombre = nombre; */
         this.apellido = apellido;
         this.dni = dni;
         this.edad = edad;
@@ -36,9 +37,14 @@ public class Alumno implements Comparable<Alumno> {
     }
 
     //Getters
-    public String getNombre() {
-        return this.nombre;
+    @Override
+    public int getCantidadAlumnos() {
+        return 1;
     }
+
+    /* public String getNombre() {
+        return this.nombre;
+    } */
 
     public String getApellido() {
         return this.apellido;
@@ -57,7 +63,7 @@ public class Alumno implements Comparable<Alumno> {
 
         try {
             Alumno otroAlumno = (Alumno) o;
-            return this.getNombre().equalsIgnoreCase(otroAlumno.getNombre()) && this.getApellido().equalsIgnoreCase(otroAlumno.getApellido());
+            return this.getNombre().equalsIgnoreCase(otroAlumno.getNombre()) && this.getApellido().equalsIgnoreCase(otroAlumno.getApellido()) && this.getDni().equalsIgnoreCase(otroAlumno.getDni());
         }
         catch(Exception exc) {
             return false;
@@ -66,6 +72,6 @@ public class Alumno implements Comparable<Alumno> {
 
     @Override
     public String toString() {
-        return "Alumno [nombre=" + nombre + ", apellido=" + apellido + "]";
+        return "Alumno [nombre=" + this.getNombre() + ", apellido=" + this.apellido + "]";
     }
 }
