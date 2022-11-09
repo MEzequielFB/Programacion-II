@@ -12,9 +12,12 @@ public class Main {
         Nodo nodo2 = new Nodo(11);
         Nodo nodo3 = new Nodo(12);
 
-        lista_vinculada1.addNodo(nodo1);
+        /* lista_vinculada1.addNodo(nodo1);
         lista_vinculada1.addNodo(nodo2);
-        lista_vinculada1.addNodo(nodo3);
+        lista_vinculada1.addNodo(nodo3); */
+        lista_vinculada1.addNodo(11);
+        lista_vinculada1.addNodo(11);
+        lista_vinculada1.addNodo(12);
         /* lista_vinculada1.addNodo(10);
         lista_vinculada1.addNodo(11);
         lista_vinculada1.addNodo(11);
@@ -39,19 +42,30 @@ public class Main {
 
         Nodo nodo4 = new Nodo(14);
         Nodo nodo5 = new Nodo(9);
-        lista_vinculada1.addNodo(nodo5);
+        /* lista_vinculada1.addNodo(nodo5); */
+        lista_vinculada1.addNodo(9);
         System.out.println();
         lista_vinculada1.imprimir();
 
         System.out.println();
         lista_vinculada1.setComportamientoAdd(add_ascendente);
-        lista_vinculada1.addNodo(nodo4);
+        /* lista_vinculada1.addNodo(nodo4); */
+        lista_vinculada1.addNodo(14);
         lista_vinculada1.imprimir();
 
-        /* Alumno alumno1 = new Alumno("esteban", "qatar", "41859294", 21);
+        Alumno alumno1 = new Alumno("esteban", "qatar", "41859294", 21);
+        alumno1.addInteres("deporte");
+        alumno1.addInteres("leer");
+
         Alumno alumno2 = new Alumno("valentina", "cuba", "44849294", 19);
+        alumno2.addInteres("musica");
+        alumno2.addInteres("videojuegos");
         Nodo nodo_alumno1 = new Nodo(alumno1);
         Nodo nodo_alumno2 = new Nodo(alumno2);
-        ListaVinculada lista_vinculada2 = new ListaVinculada(nodo_alumno1, add_descendente); */
+        ListaVinculada lista_vinculada2 = new ListaVinculada(nodo_alumno1, add_descendente);
+        lista_vinculada2.addNodo(alumno2);
+        for (Nodo nodo : lista_vinculada2) {
+            System.out.println("Alumno: " + nodo);
+        }
     }
 }

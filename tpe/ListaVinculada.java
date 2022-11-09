@@ -61,8 +61,8 @@ public class ListaVinculada implements Iterable<Nodo> {
         }
     }
 
-    public void addNodo(Nodo nodo_nuevo) {
-        this.nodo_raiz.addNodo(nodo_nuevo, this.comportamiento_add);
+    public void addNodo(Comparable objeto_comparable) {
+        this.nodo_raiz.addNodo(objeto_comparable, this.comportamiento_add);
     }
 
     public void imprimir() {
