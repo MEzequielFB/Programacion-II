@@ -62,7 +62,12 @@ public class ListaVinculada implements Iterable<Nodo> {
     }
 
     public void addNodo(Comparable objeto_comparable) {
-        this.nodo_raiz.addNodo(objeto_comparable, this.comportamiento_add);
+        Nodo nodo_nuevo = new Nodo(objeto_comparable);
+        boolean seAgregaComoSiguiente = this.comportamiento_add.add(this.nodo_raiz, nodo_nuevo);
+        if (!seAgregaComoSiguiente) { //Si un nodo se agrega como anterior del nodo raiz, ese nodo se vuelve el nodo raiz
+            this.setNodoRaiz(this.nodo_raiz.getAnteriorNodo());
+        }
+        /* this.nodo_raiz.addNodo(nodo_nuevo, this.comportamiento_add); */
     }
 
     public void imprimir() {
