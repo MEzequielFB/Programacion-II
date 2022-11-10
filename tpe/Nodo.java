@@ -100,13 +100,13 @@ public class Nodo {
         return contador;
     }
 
-    public int getPosicionNodo(Nodo nodo_buscado, int posicion_nodo) {
-        if (this.equals(nodo_buscado)) {
+    public int getPosicionNodo(Comparable objeto_comparable, int posicion_nodo) {
+        if (this.objeto_comparable.compareTo(objeto_comparable) == 0) {
             return posicion_nodo;
         }
         posicion_nodo++;
         if (this.siguiente_nodo != null) {
-            return this.siguiente_nodo.getPosicionNodo(nodo_buscado, posicion_nodo);
+            return this.siguiente_nodo.getPosicionNodo(objeto_comparable, posicion_nodo);
         }
         return -1;
     }

@@ -77,7 +77,7 @@ public class ListaVinculada implements Iterable<Nodo> {
     //Getters
     public Nodo getNodoPorPosicion(int posicion_param) {
         int posicion = 0;
-        if (this.getPosicionNodo(this.nodo_raiz) == posicion_param) {
+        if (this.getPosicionNodo(this.nodo_raiz.getObjetoComparable()) == posicion_param) {
             return this.nodo_raiz;
         }
         posicion++;
@@ -100,16 +100,16 @@ public class ListaVinculada implements Iterable<Nodo> {
         return contador;
     }
 
-    public int getPosicionNodo(Nodo nodo_buscado) {
+    public int getPosicionNodo(Comparable objeto_comparable) {
 
         int posicion_nodo = 0;
-        if (this.nodo_raiz.equals(nodo_buscado)) {
+        if (this.nodo_raiz.getObjetoComparable().compareTo(objeto_comparable) == 0) {
             return posicion_nodo;
         }
         posicion_nodo++;
         Nodo siguiente_nodo = this.nodo_raiz.getSiguienteNodo();
         if (siguiente_nodo != null) {
-            return siguiente_nodo.getPosicionNodo(nodo_buscado, posicion_nodo);
+            return siguiente_nodo.getPosicionNodo(objeto_comparable, posicion_nodo);
         }
         return -1;
     }
