@@ -2,9 +2,9 @@ public class Administrador {
     public static void main(String[] args) { //Punto 4
 
         //Inciso a
-        Nodo nodo_raiz = new Nodo(10);
         ComportamientoAddAscendente add_ascendente = new ComportamientoAddAscendente();
-        ListaVinculada lista_numeros = new ListaVinculada(nodo_raiz, add_ascendente);
+        ListaVinculada lista_numeros = new ListaVinculada(add_ascendente);
+        lista_numeros.addNodo(10);
         lista_numeros.addNodo(21);
         lista_numeros.addNodo(1);
         lista_numeros.addNodo(5);
@@ -27,8 +27,8 @@ public class Administrador {
 
         //Inciso d
         System.out.println();
-        Nodo nodo_raiz2 = new Nodo("facil");
-        ListaVinculada lista_strings = new ListaVinculada(nodo_raiz2, add_ascendente);
+        ListaVinculada lista_strings = new ListaVinculada(add_ascendente);
+        lista_strings.addNodo("facil");
         lista_strings.addNodo("es");
         lista_strings.addNodo("parcial");
         lista_strings.addNodo("prog 2");
@@ -135,8 +135,8 @@ public class Administrador {
         grupo_olimpiadas1.addElemento(grupo_olimpiadas2);
         grupo_olimpiadas1.addElemento(grupo_olimpiadas3);
 
-        Nodo nodo_raiz3 = new Nodo(grupo_olimpiadas1);
-        ListaVinculada lista_estructuras = new ListaVinculada(nodo_raiz3, add_descendente);
+        ListaVinculada lista_estructuras = new ListaVinculada(add_descendente);
+        lista_estructuras.addNodo(grupo_olimpiadas1);
         lista_estructuras.addNodo(grupo_unicen1);
         for (Nodo estructura : lista_estructuras) {
             System.out.println("Estructura: " + estructura);

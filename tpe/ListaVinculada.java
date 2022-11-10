@@ -5,6 +5,9 @@ public class ListaVinculada implements Iterable<Nodo> {
     private Nodo nodo_raiz;
     private ComportamientoAdd comportamiento_add;
 
+    public ListaVinculada(ComportamientoAdd comportamiento_add) {
+        this.comportamiento_add = comportamiento_add;
+    }
     public ListaVinculada(Nodo nodo_raiz, ComportamientoAdd comportamiento_add) {
         this.nodo_raiz = nodo_raiz;
         this.comportamiento_add = comportamiento_add;
@@ -63,9 +66,13 @@ public class ListaVinculada implements Iterable<Nodo> {
 
     public void addNodo(Comparable objeto_comparable) {
         Nodo nodo_nuevo = new Nodo(objeto_comparable);
-        boolean seAgregaComoSiguiente = this.comportamiento_add.add(this.nodo_raiz, nodo_nuevo);
-        if (!seAgregaComoSiguiente) { //Si un nodo se agrega como anterior del nodo raiz, ese nodo se vuelve el nodo raiz
-            this.setNodoRaiz(this.nodo_raiz.getAnteriorNodo());
+        if (this.nodo_raiz != null) {
+            boolean seAgregaComoSiguiente = this.comportamiento_add.add(this.nodo_raiz, nodo_nuevo);
+            if (!seAgregaComoSiguiente) { //Si un nodo se agrega como anterior del nodo raiz, ese nodo se vuelve el nodo raiz
+                this.setNodoRaiz(this.nodo_raiz.getAnteriorNodo());
+            }
+        } else {
+            this.setNodoRaiz(nodo_nuevo);
         }
         /* this.nodo_raiz.addNodo(nodo_nuevo, this.comportamiento_add); */
     }
