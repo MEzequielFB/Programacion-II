@@ -16,18 +16,18 @@ public class ListaVinculada implements Iterable<Nodo> {
         return new IteradorNodos();
     }
 
-    public void removeNodoPorNodo(Nodo nodo_param) {
+    public void removeNodoPorValor(Comparable objeto_comparable) {
         Nodo siguiente_nodo_raiz = this.nodo_raiz.getSiguienteNodo();
-        if (this.nodo_raiz.equals(nodo_param)) {
+        if (this.nodo_raiz.getObjetoComparable().compareTo(objeto_comparable) == 0) {
             if (siguiente_nodo_raiz != null) {
                 this.setNodoRaiz(siguiente_nodo_raiz);
                 this.nodo_raiz.setAnteriorNodo(null);
-                this.removeNodoPorNodo(nodo_param); //Se llama a si misma porque cambia el nodo raiz. Se verifica que la nueva raiz no conincida con el nodo a borrar
+                this.removeNodoPorValor(objeto_comparable); //Se llama a si misma porque cambia el nodo raiz. Se verifica que la nueva raiz no conincida con el nodo a borrar
             } else {
                 this.setNodoRaiz(null);
             }
         } else if (siguiente_nodo_raiz != null) {
-            siguiente_nodo_raiz.removeNodoPorNodo(nodo_param);
+            siguiente_nodo_raiz.removeNodoPorValor(objeto_comparable);
         }
     }
 

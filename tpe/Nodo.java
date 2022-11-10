@@ -18,17 +18,17 @@ public class Nodo {
         /* } */
     }
 
-    public void removeNodoPorNodo(Nodo nodo_param) {
-        if (this.equals(nodo_param)) {
+    public void removeNodoPorValor(Comparable objeto_comparable) {
+        if (this.objeto_comparable.compareTo(objeto_comparable) == 0) {
             if (this.siguiente_nodo != null) {
                 this.anterior_nodo.setSiguienteNodo(this.siguiente_nodo);
                 this.siguiente_nodo.setAnteriorNodo(this.anterior_nodo);
-                this.anterior_nodo.removeNodoPorNodo(nodo_param); //Llama al remove del anterior nodo para seguir eliminando ocurrencias
+                this.anterior_nodo.removeNodoPorValor(objeto_comparable); //Llama al remove del anterior nodo para seguir eliminando ocurrencias
             } else {
                 this.anterior_nodo.setSiguienteNodo(null);
             }
         } else if (this.siguiente_nodo != null) {
-            this.siguiente_nodo.removeNodoPorNodo(nodo_param);
+            this.siguiente_nodo.removeNodoPorValor(objeto_comparable);
         }
     }
 
