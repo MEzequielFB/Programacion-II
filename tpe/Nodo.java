@@ -60,18 +60,18 @@ public class Nodo {
         }
     }
 
-    public void addNodo(Nodo nodo_nuevo, ComportamientoAdd comportamiento_add) {
+    /* public void addNodo(Nodo nodo_nuevo, ComportamientoAdd comportamiento_add) { */
         /* if (this.siguiente_nodo == null) {
             comportamiento_add.add(this, objeto_comparable);
         } else {
             this.siguiente_nodo.addNodo(objeto_comparable, comportamiento_add);
         } */
-        boolean seAgrego = false;
+        /* boolean seAgrego = false;
         if (this.siguiente_nodo != null) {
             this.siguiente_nodo.addNodo(nodo_nuevo, comportamiento_add);
         }
         comportamiento_add.add(this, nodo_nuevo);
-    }
+    } */
 
     public void imprimir() {
         System.out.println(this);
