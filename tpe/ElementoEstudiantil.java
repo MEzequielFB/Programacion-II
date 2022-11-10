@@ -13,4 +13,9 @@ public abstract class ElementoEstudiantil {
     public String getNombre() {
         return this.nombre;
     }
+
+    @Override
+    public String toString() {
+        return "ElementoEstudiantil [nombre=" + nombre + "]";
+    }
 }
