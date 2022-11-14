@@ -43,13 +43,6 @@ public class Nodo {
         }
     }
 
-    /* public void imprimir() {
-        System.out.println(this);
-        if (this.siguiente_nodo != null) {
-            this.siguiente_nodo.imprimir();
-        }
-    } */
-
     //Getters
     public Nodo getNodoPorPosicion(int posicion_param, int posicion_nodo) {
         if (posicion_nodo == posicion_param) {

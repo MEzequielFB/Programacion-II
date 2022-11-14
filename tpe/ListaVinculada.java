@@ -62,10 +62,6 @@ public class ListaVinculada implements Iterable<Nodo> {
         }
     }
 
-    /* public void imprimir() {
-        this.nodo_raiz.imprimir();
-    } */
-
     //Getters
     public Nodo getNodoPorPosicion(int posicion_param) {
         int posicion = 0;
