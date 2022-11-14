@@ -20,71 +20,56 @@ public class ListaVinculada implements Iterable<Nodo> {
     }
 
     public void removeNodoPorValor(Comparable objeto_comparable) {
-        Nodo siguiente_nodo_raiz = this.nodo_raiz.getSiguienteNodo();
-        if (this.nodo_raiz.getObjetoComparable().compareTo(objeto_comparable) == 0) {
-            if (siguiente_nodo_raiz != null) {
+        Nodo siguiente_nodo_raiz = this.nodo_raiz.getSiguienteNodo(); //Obtiene el siguiente nodo de la raiz
+        if (this.nodo_raiz.getObjetoComparable().compareTo(objeto_comparable) == 0) { //Si el valor del nodo raiz es igual al pasado por parametro...
+            if (siguiente_nodo_raiz != null) { //Si la raiz tiene un nodo siguiente, el siguiente se setea como el nodo raiz y el anterior del nuevo nodo raiz se setea como null. Despues se vuelve a llamar al removeNodoPorValor para verificar si el valor de la nueva raiz coincide con el valor a borrar
                 this.setNodoRaiz(siguiente_nodo_raiz);
                 this.nodo_raiz.setAnteriorNodo(null);
-                this.removeNodoPorValor(objeto_comparable); //Se llama a si misma porque cambia el nodo raiz. Se verifica que la nueva raiz no conincida con el nodo a borrar
-            } else {
+                this.removeNodoPorValor(objeto_comparable);
+            } else { //Si el valor del nodo raiz es igual al pasado por parametro y la raiz no tiene un nodo siguiente, se setea como null la raiz
                 this.setNodoRaiz(null);
             }
-        } else if (siguiente_nodo_raiz != null) {
+        } else if (siguiente_nodo_raiz != null) { //Si los valores son distintos y la raiz tiene un nodo siguiente se llama al removeNodoPorValor de su siguiente
             siguiente_nodo_raiz.removeNodoPorValor(objeto_comparable);
         }
     }
 
-    /* public void removeNodoPorObjetoComparable(Comparable objeto_comparable) {
+    public void removeNodoPorPosicion(int posicion) { //Se pasa una posicion por parametro
+        int posicion_nodo = 0; //Se setea una posicion local que se inicializa en 0
         Nodo siguiente_nodo_raiz = this.nodo_raiz.getSiguienteNodo();
-        if (this.nodo_raiz.getObjetoComparable().compareTo(objeto_comparable) == 0) {
-            if (siguiente_nodo_raiz != null) {
-                this.setNodoRaiz(siguiente_nodo_raiz);
-                this.removeNodoPorObjetoComparable(objeto_comparable); //Se llama a si misma porque cambia el nodo raiz. Se verifica que la nueva raiz no conincida con el nodo a borrar
-            } else {
+        if (posicion_nodo == posicion) { //Si el parametro y la posicion local son iguales...
+            if (siguiente_nodo_raiz != null) { //Si el siguiente del nodo raiz no es null...
+                this.setNodoRaiz(siguiente_nodo_raiz); //El siguiente del nodo raiz se setea como el nuevo nodo raiz
+                this.nodo_raiz.setAnteriorNodo(null); //El nodo anterior del nuevo nodo raiz se setea como null
+            } else { //Si el nodo raiz no tiene siguiente se setea como null al nodo raiz de la lista
                 this.setNodoRaiz(null);
             }
-        } else if (siguiente_nodo_raiz != null) {
-            siguiente_nodo_raiz.removeNodoPorObjetoComparable(objeto_comparable);
-        }
-    } */
-
-    public void removeNodoPorPosicion(int posicion) {
-        int posicion_nodo = 0;
-        Nodo siguiente_nodo_raiz = this.nodo_raiz.getSiguienteNodo();
-        if (posicion_nodo == posicion) {
-            if (siguiente_nodo_raiz != null) {
-                this.setNodoRaiz(siguiente_nodo_raiz);
-                this.nodo_raiz.setAnteriorNodo(null);
-            } else {
-                this.setNodoRaiz(null);
-            }
-        } else if (siguiente_nodo_raiz != null) {
-            posicion_nodo++;
-            siguiente_nodo_raiz.removeNodoPorPosicion(posicion_nodo, posicion);
+        } else if (siguiente_nodo_raiz != null) { //Si las posiciones no son iguales y el nodo raiz tiene un nodo siguiente...
+            posicion_nodo++; //Se incrementa la posicion local
+            siguiente_nodo_raiz.removeNodoPorPosicion(posicion_nodo, posicion); //Se llama al remove de su siguiente nodo pasando por parametro la posicion local y la pasada por parametro
         }
     }
 
     public void addNodo(Comparable objeto_comparable) {
-        Nodo nodo_nuevo = new Nodo(objeto_comparable);
-        if (this.nodo_raiz != null) {
-            boolean seAgregaComoSiguiente = this.comportamiento_add.add(this.nodo_raiz, nodo_nuevo);
+        Nodo nodo_nuevo = new Nodo(objeto_comparable); //Se crea un nodo con el valor pasado por parametro
+        if (this.nodo_raiz != null) { //Si la raiz no es null...
+            boolean seAgregaComoSiguiente = this.comportamiento_add.add(this.nodo_raiz, nodo_nuevo); //Es true si el nodo nuevo se setea como nodo posterior al actual. Es false si el nodo nuevo se setea como nodo anterior al actual
             if (!seAgregaComoSiguiente) { //Si un nodo se agrega como anterior del nodo raiz, ese nodo se vuelve el nodo raiz
                 this.setNodoRaiz(this.nodo_raiz.getAnteriorNodo());
             }
-        } else {
+        } else { //Si el nodo raiz de la lista es null, se setea como nodo raiz el nodo creado
             this.setNodoRaiz(nodo_nuevo);
         }
-        /* this.nodo_raiz.addNodo(nodo_nuevo, this.comportamiento_add); */
     }
 
-    public void imprimir() {
+    /* public void imprimir() {
         this.nodo_raiz.imprimir();
-    }
+    } */
 
     //Getters
     public Nodo getNodoPorPosicion(int posicion_param) {
         int posicion = 0;
-        if (this.getPosicionNodo(this.nodo_raiz.getObjetoComparable()) == posicion_param) {
+        if (this.getPosicionNodo(this.nodo_raiz.getObjetoComparable()) == posicion_param) { //Si la posicion de la raiz es igual a la pasada por parametro se devuelve el nodo raiz
             return this.nodo_raiz;
         }
         posicion++;
@@ -92,12 +77,12 @@ public class ListaVinculada implements Iterable<Nodo> {
         if (siguiente_nodo != null) {
             return siguiente_nodo.getNodoPorPosicion(posicion_param, posicion);
         }
-        return null;
+        return null; //Se devuelve null si no hay ocurrencias
     }
 
     public int getCantidadNodos() {
         int contador = 0;
-        if (this.nodo_raiz != null) {
+        if (this.nodo_raiz != null) { //Si el nodo raiz no es null...
             contador++;
             Nodo siguiente_nodo = this.nodo_raiz.getSiguienteNodo();
             if (siguiente_nodo != null) {
@@ -109,16 +94,16 @@ public class ListaVinculada implements Iterable<Nodo> {
 
     public int getPosicionNodo(Comparable objeto_comparable) {
 
-        int posicion_nodo = 0;
-        if (this.nodo_raiz.getObjetoComparable().compareTo(objeto_comparable) == 0) {
+        int posicion_nodo = 0; //Se inicializa una posicion local en 0
+        if (this.nodo_raiz.getObjetoComparable().compareTo(objeto_comparable) == 0) { //Si el valor del nodo raiz es igual al pasado por parametro se devuelve la posicion local
             return posicion_nodo;
         }
         posicion_nodo++;
         Nodo siguiente_nodo = this.nodo_raiz.getSiguienteNodo();
-        if (siguiente_nodo != null) {
+        if (siguiente_nodo != null) { //Si el siguiente nodo no es null se llama a su getPosicion
             return siguiente_nodo.getPosicionNodo(objeto_comparable, posicion_nodo);
         }
-        return -1;
+        return -1; //Retorna -1 si no hay ocurrencias
     }
 
     public Nodo getNodoRaiz() {
@@ -130,22 +115,16 @@ public class ListaVinculada implements Iterable<Nodo> {
     }
 
     //Setters
-    public void setComportamientoAdd(ComportamientoAdd comportamiento_add) {
+    public void setComportamientoAdd(ComportamientoAdd comportamiento_add) { //Se invierte la lista al cambiar el comportamiento_add
         this.comportamiento_add = comportamiento_add;
         this.invertirLista();
-        /* int posicion_final = this.getCantidadNodos() - 1;
-        if (posicion_final != -1) {
-            Nodo ultimo_nodo = this.getNodoPorPosicion(posicion_final);
-            this.setNodoRaiz(ultimo_nodo);
-            this.addNodo(ultimo_nodo);
-        } */
     }
 
     private void invertirLista() {
         int cantidad_nodos = this.getCantidadNodos();
         int posicion_final = cantidad_nodos - 1;
         Nodo ultimo_nodo = null;
-        if (cantidad_nodos > 0) {
+        if (cantidad_nodos > 0) { //Si hay nodos en la lista, se guarda el ultimo nodo en una variable
             ultimo_nodo = this.getNodoPorPosicion(posicion_final);
         }
         while (posicion_final >= 0) {
@@ -153,26 +132,10 @@ public class ListaVinculada implements Iterable<Nodo> {
             nodo_actual.invertirSiguienteAnterior();
             posicion_final--;
         }
-        if (ultimo_nodo != null) {
+        if (ultimo_nodo != null) { //El ultimo nodo se convierte en el nodo raiz si no es null
             this.setNodoRaiz(ultimo_nodo);
         }
-        /* this.recorrer(cantidad_nodos); */
     }
-
-    /* public void recorrer(int cantidad_nodos) {
-        int posicion_inicial = 0;
-        if (posicion_inicial < cantidad_nodos - 1) {
-            this.getNodoPorPosicion(posicion_inicial).setAnteriorNodo(null);
-        }
-        while (posicion_inicial < cantidad_nodos - 1) {
-            Nodo nodo_actual = this.getNodoPorPosicion(posicion_inicial);
-            Nodo siguiente_nodo = nodo_actual.getSiguienteNodo();
-            if (siguiente_nodo != null) {
-                siguiente_nodo.setAnteriorNodo(nodo_actual);
-            }
-            posicion_inicial++;
-        }
-    } */
 
     public void setNodoRaiz(Nodo nodo_raiz) {
         this.nodo_raiz = nodo_raiz;

@@ -18,19 +18,10 @@ public class ComportamientoAddAscendente extends ComportamientoAdd {
                 nodo_nuevo.setSiguienteNodo(siguiente_nodo);
             }
             return true;
-            /* nodo.setSiguienteNodo(nodo_nuevo);
-            return true; */
-            /* nodo_nuevo.setAnteriorNodo(nodo); */
         } else { //El nodo nuevo se agrega como anterior del nodo
             nodo.setAnteriorNodo(nodo_nuevo);
             nodo_nuevo.setSiguienteNodo(nodo);
             return false;
         }
-        /*  else {
-            nodo_nuevo.setSiguienteNodo(nodo);
-            nodo_nuevo.setAnteriorNodo(nodo.getAnteriorNodo());
-            nodo_nuevo.getAnteriorNodo().setSiguienteNodo(nodo_nuevo);
-            nodo.setAnteriorNodo(nodo_nuevo);
-        } */
     }
 }
