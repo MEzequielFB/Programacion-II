@@ -5,8 +5,8 @@ public class SeccionCaducidad extends Seccion {
     private LocalDate fecha_inicio;
     private LocalDate fecha_fin;
 
-    public SeccionCaducidad(String titulo, String editor, int posicion_categoria, LocalDate fecha_inicio, LocalDate fecha_fin) {
-        super(titulo, editor, posicion_categoria);
+    public SeccionCaducidad(String titulo, String editor, int posicion_categoria, CalculadorPalabraClave calculador_palabra_clave, LocalDate fecha_inicio, LocalDate fecha_fin) {
+        super(titulo, editor, posicion_categoria, calculador_palabra_clave);
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
     }
